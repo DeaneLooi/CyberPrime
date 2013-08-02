@@ -6,27 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Chat</title>
 </head>
-<style>
-textarea
-{
-    border:1px solid #999999;
-    width:98%;
-    margin:5px 0;
-    padding:1%;
-}
+<link rel="stylesheet" type="text/css" href="css/securedStyle.css" />
 
-body{
-    background-color:white;
-}
-#displayMessage{
-    width:100%;
-    height:350px;
-    border-style:solid;
-    border-width:1px;
-    border-color:black;
-}
-
-</style>
 <%@ page import ="cyberprime.entities.Clients" %>
 <%
 session = request.getSession();

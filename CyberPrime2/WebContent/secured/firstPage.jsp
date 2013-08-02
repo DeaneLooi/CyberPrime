@@ -5,14 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<style>
-#textContent {
-text-align:center;
-}
-body {
-background-color:white;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="css/securedStyle.css" />
 </head>
 <body>
 <div id="textContent">
