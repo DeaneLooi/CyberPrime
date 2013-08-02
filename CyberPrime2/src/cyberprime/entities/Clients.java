@@ -18,14 +18,12 @@ public class Clients {
 	private String pattern;
 	private String token;
 	private String activation;
-	private String loggedIn;
-	
 	
 	public Clients(){
 		super();
 	}
 	
-	public Clients(String userId, String imageHash, int imageSize, String imageExtension, String email, String pattern, String loggedIn) {
+	public Clients(String userId, String imageHash, int imageSize, String imageExtension, String email, String pattern) {
 		this();
 		this.userId = userId;
 		this.imageHash = imageHash;
@@ -33,7 +31,6 @@ public class Clients {
 		this.imageExtension = imageExtension;
 		this.email = email;
 		this.pattern = pattern;
-		this.loggedIn = loggedIn;
 	}
 	
 	
@@ -48,13 +45,6 @@ public class Clients {
 	}
 	public void setImageHash(String imageHash) {
 		this.imageHash = imageHash;
-	}
-	public String getLoggedIn() {
-		return loggedIn;
-	}
-
-	public void setLoggedIn(String loggedIn) {
-		this.loggedIn = loggedIn;
 	}
 
 	public int getImageSize() {
