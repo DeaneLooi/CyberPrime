@@ -14,6 +14,7 @@ import org.apache.commons.io.*;
 
 import cyberprime.entities.*;
 import cyberprime.entities.dao.*;
+import cyberprime.util.FileEncryption;
 import cyberprime.util.TestProgressListener;
 
 @WebServlet("/FileTransfer")
@@ -23,9 +24,12 @@ public class FileTransfer extends HttpServlet {
 	private boolean isMultipart;
 	private String filePath;
 	private int maxFileSize = 1024 * 1024 * 50; // 50mb size
-	private File file;
+	static File file;
 	private String Id = null;
 	private static final int BUFSIZE = 4096;
+	public static Notifications n = null;
+
+	Files files = new Files();
 
 	public void init() {
 		/*
@@ -99,7 +103,7 @@ public class FileTransfer extends HttpServlet {
 				Set sessions = (Set) getServletContext().getAttribute(
 						"cyberprime.sessions");
 				Iterator sessionIt = sessions.iterator();
-
+				boolean check = false;
 				while (iterator.hasNext()) {
 					FileItem item = iterator.next();
 					if (item.isFormField()) {
@@ -124,8 +128,8 @@ public class FileTransfer extends HttpServlet {
 
 							if (Id.equalsIgnoreCase(sess.getClientId())) {
 								// Get the uploaded file parameters
-
-								Notifications n = new Notifications(
+								check = true;
+								 n = new Notifications(
 										client.getUserId(), sess.getClientId(),
 										"FileTransfer");
 
@@ -145,8 +149,14 @@ public class FileTransfer extends HttpServlet {
 										file = new File(filePath
 												+ fileName.substring(fileName
 														.lastIndexOf("\\") + 1));
+										
+										
 										out.println("<p><strong>Thank You For Waiting</strong></p>");
+
 										item.write(file);
+										
+										//encrypt
+										file = new FileEncryption("AES", file.getAbsolutePath()).encrypt();
 										out.println("Uploaded Filename: "
 												+ fileName + "<br>");
 										out.println("<p>File Size: "  
@@ -155,29 +165,32 @@ public class FileTransfer extends HttpServlet {
 									out.println("</body>");
 									out.println("</html>");
 									
-									Files files = new Files();
 									files.setFileName(fileName);
 									files.setFilePath(filePath + fileName);
 									files.setLength((int)sizeInBytes);
 									files.setMimeType(mimeType);
-									
 									
 								} catch (Exception ex) {
 									out.print("<p><strong>No file found, please try again.</strong></p>");
 									out.println("</body>");
 									out.println("</html>");
 								}
+								
+								return;
 							}
 
 							else {
-
-								out.println("<p><strong>Please put a a valid ID.</strong></p>");
-								out.println("</body>");
-								out.println("</html>");
+								check = false;
 
 							}
 						}
 					}
+				}
+				
+				if(check = false){
+					out.println("<p><strong>Please put a a valid ID.</strong></p>");
+					out.println("</body>");
+					out.println("</html>");
 				}
 			}
 		} catch (FileUploadException e) {
@@ -211,6 +224,8 @@ public class FileTransfer extends HttpServlet {
 			throws ServletException, java.io.IOException {
 	
 		try{
+		//decrypt 	
+		file = new FileEncryption("AES", files.getFilePath() + ".enc").decrypt();
 		file = new File(filePath + file.getName());
 		int length = 0;
 		ServletOutputStream outStream = response.getOutputStream();
@@ -243,9 +258,16 @@ public class FileTransfer extends HttpServlet {
 		outStream.close();
 		file.delete();
 		
+		System.out.println(n.getSender()+n.getContent()+n.getReceiver());
+		NotificationsDAO.deleteNotification(n);
+				
 		} catch(IOException e){
 			e.printStackTrace();
 			System.out.println(e);
+			System.out.println(files.getFilePath());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		}
 

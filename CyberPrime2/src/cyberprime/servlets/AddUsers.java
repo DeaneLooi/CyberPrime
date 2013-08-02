@@ -21,7 +21,7 @@ import cyberprime.entities.dao.NotificationsDAO;
 //@WebServlet("/AddUsers")
 public class AddUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    public static Notifications n = null;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,7 +41,7 @@ public class AddUsers extends HttpServlet {
 		String username = request.getParameter("username");
 		HttpSession sess = request.getSession();
 		Clients client = (Clients)sess.getAttribute("c");
-		Notifications n = new Notifications(client.getUserId(),username,"AddUser");
+		n = new Notifications(client.getUserId(),username,"AddUser");
 	
 	    // Check for online users before creating notifications
 		Set sessions = (Set) getServletContext().getAttribute("cyberprime.sessions");

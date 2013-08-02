@@ -93,14 +93,15 @@
     <filter-name>AccessFilter</filter-name>
     <filter-class>cyberprime.servlets.filters.AccessFilter</filter-class>
   </filter>
-  
-  <!--  Disable for auto login -->
-  <!-- 
   <filter-mapping>
-    <filter-name>AccessFilter</filter-name>
-    <url-pattern>/secured/*</url-pattern>
-  </filter-mapping>
-  -->
+<filter-name>AccessFilter</filter-name>
+<url-pattern>/secured/*</url-pattern>
+</filter-mapping>
+  <listener>
+  	<listener-class>
+  	cyberprime.servlets.HttpServletListener
+  	</listener-class>
+  </listener>
   
   <context-param>
     <description>Location to store uploaded file</description>

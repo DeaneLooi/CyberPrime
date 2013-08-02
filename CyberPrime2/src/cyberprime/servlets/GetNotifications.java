@@ -84,10 +84,10 @@ public class GetNotifications extends HttpServlet {
 		    	 html+="<div style='border-style:solid;border-color:black;border-width:1px;padding:5px'>";
 		    	 html+=content+"<br>";
 		    	 if(n.getContent().equalsIgnoreCase("AddUser"))
-		    		 html+="<a href=''>Accept</a>         <a href=''>Reject</a>";
+		    		 html+="<a href='AddUsers'>Accept</a>         <a href='Reject?content=AddUser'>Reject</a>";
 		    	 
 		    	 else if(n.getContent().equalsIgnoreCase("FileTransfer"))
-		    		 html+="<a href ='FileTransfer'>Accept</a>         <a href=''>Reject</a>";
+		    		 html+="<a href ='FileTransfer'>Accept</a>         <a href='Reject?content=FileTransfer'>Reject</a>";
 		    	 html+="</div>";
 		     }
 		     

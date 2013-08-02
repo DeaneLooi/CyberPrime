@@ -17,20 +17,21 @@ public class FileEncryption {
 	String filePath = files.getFilePath();
 	private File file;
 	private String algorithm;
+	private File testFile;
 
-	public FileEncryption(String algorithm, String path){
+	public FileEncryption(String algorithm, String filePath){
 		this.algorithm = algorithm;
-		this.file = new File(files.getFilePath());
+		this.testFile = new File(filePath);
 	}
 	
-	public void encrypt() throws Exception{
+	public File encrypt() throws Exception{
 		//opening streams
-		FileInputStream inputStream = new FileInputStream(file);
-		file = new File(file.getAbsolutePath()+".enc");
+		FileInputStream inputStream = new FileInputStream(testFile);
+		file = new File(testFile.getAbsolutePath() + ".enc");
 		FileOutputStream outStream = new FileOutputStream(file);
 		
 		//generating keys
-		byte k[] = "HignDIPs".getBytes();
+		byte k[] = "cYbeRprImESeCkEy".getBytes();
 		SecretKeySpec key = new SecretKeySpec(k,algorithm.split("/")[0]);
 		
 		//creating and initializing cipher and cipher streams
@@ -49,16 +50,19 @@ public class FileEncryption {
 		inputStream.close();
 		c.flush();
 		c.close();
+		testFile.delete();
+		
+		return file;
 	}
 	
-	public void decrypt() throws Exception { 
+	public File decrypt() throws Exception { 
 		//opening Stream
-		FileInputStream fis = new FileInputStream(file);
-		file = new File(file.getAbsolutePath()+".dec");
+		FileInputStream fis = new FileInputStream(testFile);
+		file = new File(testFile.getAbsolutePath().substring(0,testFile.getAbsolutePath().length()-4));
 		FileOutputStream fos = new FileOutputStream(file);
 		
 		//generating keys
-		byte k[] = "HignDIPs".getBytes();
+		byte k[] = "cYbeRprImESeCkEy".getBytes();
 		SecretKeySpec key = new SecretKeySpec(k, algorithm.split("/")[0]);
 		
 		//creating and initializing cipher and cipher streams
@@ -70,19 +74,21 @@ public class FileEncryption {
 		int read = 0;
 		while ((read = cin.read(buf)) != -1){
 			fos.write(buf, 0 , read);
-			
-			//close streams
-			cin.close();
-			fos.flush();
-			fos.close();
-			
 		}
-
+		
+		//close streams
+		cin.close();
+		fos.flush();
+		fos.close();
+		testFile.delete();
+		
+		return file;
 	}
 	
 	
 	public static void main (String[] args) throws Exception{
-		new FileEncryptor("DES/ECB/PKCS5Padding",file).encrypt;
+		//new FileEncryption("AES", "C:\\Users\\Tan Wai Kit\\Desktop\\Chrysanthemum.jpg").encrypt();
+		//new FileEncryption("AES", "C:\\Users\\Tan Wai Kit\\Desktop\\Chrysanthemum.jpg.enc").decrypt();
 	}
 	
 	
