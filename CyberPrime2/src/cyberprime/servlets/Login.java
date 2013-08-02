@@ -100,6 +100,7 @@ public class Login extends HttpServlet {
 				
 				HttpSession existingHttpSession = request.getSession();
 				Clients existingClient = (Clients)existingHttpSession.getAttribute("c");
+				if (existingClient!=null){
 					Sessions existingSessions = new Sessions(existingHttpSession.getId(), existingClient.getUserId());
 					Set sessionArray = (Set) getServletContext().getAttribute("cyberprime.sessions");
 					Iterator sessionIt = sessionArray.iterator();
@@ -112,9 +113,9 @@ public class Login extends HttpServlet {
 								request.setAttribute("loginResult", obj);
 								request.getRequestDispatcher("patternLogin.jsp").forward(request, response);
 								return;
+							}				
 							}
-							
-							}
+				}
 				
 				Sessions s = new Sessions(session.getId(),c.getUserId());
 //				s = SessionsDAO.createSession(s);
