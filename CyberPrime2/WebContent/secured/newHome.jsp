@@ -28,7 +28,7 @@ $(document).ready(function(){
 		
 		$.ajaxSetup({ cache: false});
 
-		$.get("AddUsers", { username: username});
+		$.post("AddUsers", { username: username});
 		
 		document.getElementById('username').value = "";
 		
@@ -102,11 +102,10 @@ Clients client = (Clients) session.getAttribute("c");
 			
 <ul class="tabsContent">
 <li class="tabs" onclick="changePage('secured/firstPage.jsp');">home</li>
-<li class="tabs" onclick="changePage('secured/video.jsp');">web browsing</li>
-<li class="tabs" onclick="changePage('secured/fileTransfer.jsp');">file transfer</li>
-<li class="tabs" onclick="changePage('secured/chat.jsp');">chat</li>
-<li class="tabs" onclick="changePage('secured/conference.jsp');">video conference</li>
-<li class="tabs"><img src="images/cpicon.png"></img></li>
+<li class="tabs" onclick="changePage('secured/video.jsp');"><img src="images/newWeb.png" height="50px" width="50px">web browsing</li>
+<li class="tabs" onclick="changePage('secured/fileTransfer.jsp');"><img src="images/newFile.png" height="50px" width="50px">file transfer</li>
+<li class="tabs" onclick="changePage('secured/chat.jsp');"><img src="images/newChat.png" height="50px" width="50px">chat</li>
+<li class="tabs" onclick="changePage('secured/conference.jsp');"><img src="images/newConference.png" height="50px" width="50px">video conference</li>
 </ul>
 
 </div>

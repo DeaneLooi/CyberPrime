@@ -14,8 +14,9 @@ session = request.getSession();
 Clients client = (Clients) session.getAttribute("c");
 %>
 <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+
 <!-- https://code.google.com/p/crypto-js/ --> 
-<script>
+<!-- 
 
 function postMessage(user)  {
 	
@@ -34,7 +35,70 @@ function postMessage(user)  {
 	document.getElementById('inputMessage').value = "";
 }
 
+ -->
+ <style>
+
+body{
+background-color:#DDD;
+}
+#postMessage {
+    width:98px;
+    height:28px;
+    border: 1px solid #777777;
+    background: #333;
+    color: #DDD;
+    padding: 4px;
+    cursor: pointer;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+textarea
+{
+    border:1px solid #999999;
+    width:98%;
+    margin:5px 0;
+    padding:1%;
+}
+
+#displayMessage{
+    width:100%;
+    height:250px;
+    border-style:solid;
+    border-width:1px;
+    border-color:gray;
+    overflow-y:auto;
+    background-color:white;
+}
+
+</style>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+
+var url = 'http://localhost/CyberPrime2/Chat';
+
+$(document).ready(function() {
+
+$.ajaxSetup({ cache: false }); 
+
+setInterval(function() {$("#displayMessage").load(url); }, 1000);
+
+$("#postMessage").click(function(){
+	
+	var msg = document.getElementById('inputMessage').value;
+	
+	$.ajaxSetup({ cache: false});
+
+	$.post("http://localhost/CyberPrime2/Chat", { msg: msg});
+	
+	document.getElementById('inputMessage').value = "";
+});
+
+});
 </script>
+
 
 <body>
 <div id="chat">
@@ -44,10 +108,9 @@ function postMessage(user)  {
 </div>
 <br/><br/>
 <div id="post">
+<textarea id="inputMessage" name="msg"rows="2" cols="100" style="resize:none" placeholder="Enter your message here."></textarea>
 
-<textarea id="inputMessage" rows="2" cols="100" style="resize:none" placeholder="Enter your message here.">
-</textarea>
-<input id="postMessage" type="button" value="Post" onclick="postMessage('<%=client.getUserId() %>');">
+<input id="postMessage" type="submit" value="send">
 
 
 </div>

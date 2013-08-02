@@ -47,8 +47,8 @@ public class Logout extends HttpServlet {
 			Iterator sessionIt = sessions.iterator();
 					while(sessionIt.hasNext()) {
 					Sessions sess = (Sessions)sessionIt.next();
-					System.out.println("Client id ="+sess.getClientId());
 					if(sess.getSessionId().equals(session.getId())){
+						System.out.println("Client id ="+sess.getClientId());
 						sessionIt.remove();
 						sessions.remove(sess);
 					}

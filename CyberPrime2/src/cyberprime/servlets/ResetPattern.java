@@ -52,7 +52,6 @@ public class ResetPattern extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pattern = request.getParameter("pattern");
-		System.out.println("\n"+pattern);
 		String userId = request.getParameter("userId");
 		Clients client = new Clients();
 		client.setUserId(userId);
@@ -195,7 +194,8 @@ public class ResetPattern extends HttpServlet {
 								e1.printStackTrace();
 							}
 							String oldPattern = ClientsDAO.changePattern(c);
-							System.out.println(oldPattern);
+							c.setActivation("Reset");
+							ClientsDAO.activateClients(c);
 							EmailSender es = new EmailSender(c);
 							es.sendResetPattern(cp.getContent(),oldPattern);
 							Object obj = new Object();

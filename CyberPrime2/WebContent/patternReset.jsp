@@ -9,20 +9,17 @@
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/pattern.css"/>
   <!-- modernizr enables HTML5 elements and feature detects -->
   <script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/pattern.css"/>
   <script type="text/javascript" src="js/pattern.js"></script>
-	
 </head>
 
 <body>
-      <%@ page import ="cyberprime.entities.Clients" %>
+<%@ page import ="cyberprime.entities.Clients" %>
 <%
 session = request.getSession();
 Clients client = (Clients) session.getAttribute("client");
-
-
 String image = (String)session.getAttribute("image");
 %>
   <div id="main">
@@ -65,7 +62,6 @@ String image = (String)session.getAttribute("image");
 
 <div id="border">
 
-
 <%for(int j=0; j<8; j++){ %>
 <%for(int i=0; i<6;i++){
 	%>
@@ -76,14 +72,15 @@ String image = (String)session.getAttribute("image");
 </div>
 <img alt="<%=image%>" id="img" src="loginImages/<%=image%>"width="600" height="400">
 <div id="form">
-<form method ="post" action="${pageContext.request.contextPath}/Register">
-Choose a pattern for your password.
+<form method ="post" action="${pageContext.request.contextPath}/ChangePattern">
+Change your pattern
+
 <br>
 <input type="hidden" name="pattern"/>
 <input type="reset" value="reset" onclick="resetPattern();"/>
-<input type="submit" value="register"/>
+<input type="submit" value="login"/>
 </form>
-${regResult}
+${resetResult}
 </div>
       </div>
     </div>

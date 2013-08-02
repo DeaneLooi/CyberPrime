@@ -44,8 +44,9 @@ public class HttpServletListener extends HttpServlet implements HttpSessionListe
 		Iterator sessionIt = sessions.iterator();
 				while(sessionIt.hasNext()) {
 				Sessions sess = (Sessions)sessionIt.next();
-				System.out.println("Listener Client id ="+sess.getClientId());
+
 				if(sess.getSessionId().equals(session.getId())){
+					System.out.println("Listener Client id ="+sess.getClientId());
 					sessionIt.remove();
 					sessions.remove(sess);
 				}

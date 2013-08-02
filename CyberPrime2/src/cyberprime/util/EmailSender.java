@@ -76,7 +76,6 @@ public class EmailSender {
 			
 			for(int i=0; i<pattern.length();i++){
 				char c = pattern.charAt(i);
-				System.out.print(c);
 				if(c == '+'){
 					newPattern.add('%');
 					newPattern.add('2');
@@ -102,8 +101,7 @@ public class EmailSender {
 			for(int i=0; i<newPattern.size();i++){
 				newPatternS += newPattern.get(i);
 			}
-			
-			System.out.println("\n"+newPatternS);
+
 			try {
 	 
 				Message message = new MimeMessage(session);

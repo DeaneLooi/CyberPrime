@@ -32,6 +32,13 @@ public class StartUp extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Set sess = Collections.synchronizedSet(new HashSet());
 		getServletContext().setAttribute("cyberprime.sessions", sess);
+		
+		Set users = Collections.synchronizedSet(new HashSet());
+		getServletContext().setAttribute("cyberprime.users", users);
+		
+		Set msg = Collections.synchronizedSet(new HashSet());
+		getServletContext().setAttribute("cyberprime.msg", msg);
+		
 		response.setContentType("text/xml");
 	    response.setHeader("Cache-Control", "no-cache");
 

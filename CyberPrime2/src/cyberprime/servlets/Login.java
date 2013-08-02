@@ -71,8 +71,6 @@ public class Login extends HttpServlet {
 		if(pattern.length() != 0){
 			try {
 				client.setPattern(pattern);
-				System.out.println(client.getPattern());
-				System.out.println(c.getPattern());
 			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			}
@@ -95,7 +93,7 @@ public class Login extends HttpServlet {
 			return;
 		}
 		
-		else if(c.getActivation().equalsIgnoreCase("Active")){
+		else if(c.getActivation().equalsIgnoreCase("Active") || c.getActivation().equalsIgnoreCase("Reset")){
 			if(client.getImageHash().equals(c.getImageHash()) && client.getPattern().equals(c.getPattern())){
 				
 				HttpSession existingHttpSession = request.getSession();
@@ -107,11 +105,12 @@ public class Login extends HttpServlet {
 							while(sessionIt.hasNext()) {
 							Sessions sess = (Sessions)sessionIt.next();
 							System.out.println("Client id ="+sess.getClientId());
-							if(sess.getSessionId().equals(existingHttpSession.getId())){
+							if(sess.getClientId().equals(existingClient.getUserId())){
 								Object obj = new Object();
 								obj = "<p style='color:red'>*Your account is already logged in</p>";
 								request.setAttribute("loginResult", obj);
-								request.getRequestDispatcher("patternLogin.jsp").forward(request, response);
+								FileMethods.fileDelete(image);
+								request.getRequestDispatcher("templateLogin.jsp").forward(request, response);
 								return;
 							}				
 							}
@@ -125,11 +124,19 @@ public class Login extends HttpServlet {
 				Set sessions = (Set)getServletContext().getAttribute("cyberprime.sessions");
 				sessions.add(s);
 				session.setAttribute("c", c);
-				//session.setMaxInactiveInterval(10);
-				session.removeAttribute("image");
-				session.removeAttribute("client");
-				FileMethods.fileDelete(image);
-				request.getRequestDispatcher("secured/newHome.jsp").forward(request, response);
+				session.setMaxInactiveInterval(60);
+				
+				if(c.getActivation().equalsIgnoreCase("Active")){
+					session.removeAttribute("image");
+					session.removeAttribute("client");
+					FileMethods.fileDelete(image);
+					request.getRequestDispatcher("secured/newHome.jsp").forward(request, response);
+				}
+				
+				else if(c.getActivation().equalsIgnoreCase("Reset")){
+					request.getRequestDispatcher("patternReset.jsp").forward(request, response);
+				}
+
 			}	
 			
 			else{
@@ -140,6 +147,7 @@ public class Login extends HttpServlet {
 				return;
 			}
 		}
+
 		
 
 		

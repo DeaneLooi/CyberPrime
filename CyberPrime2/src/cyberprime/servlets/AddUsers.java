@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import cyberprime.entities.dao.NotificationsDAO;
 public class AddUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public static Notifications n = null;
+    static String sessionId;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,6 +37,51 @@ public class AddUsers extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.println(sessionId);
+		response.setContentType("application/stream");
+	    response.setHeader("Cache-Control", "no-cache");
+	    
+	    ServletOutputStream outStream = response.getOutputStream();
+	    outStream.write(new byte[0],0,0);
+	    outStream.flush();
+	    outStream.close();
+	    HttpSession session = request.getSession();
+	    Clients client = (Clients)session.getAttribute("c");
+	    
+	    Set<Sessions> users = (Set<Sessions>)getServletContext().getAttribute("cyberprime.users");
+	    Iterator<Sessions> userIt = users.iterator();
+	    Sessions newUser = new Sessions(sessionId,client.getUserId());
+	    if(!users.isEmpty()){
+		    while(userIt.hasNext()){
+		    	
+		    	Sessions user = (Sessions)userIt.next();
+		    	
+		    	if(user.getSessionId().equals(newUser.getSessionId())){
+		    		System.out.println("Requested user added");
+		    		users.add(newUser);
+		    	}
+		    	
+		    	else{
+		    		
+		    	}
+		    	
+		    }
+	    }
+	    
+	    else{
+	    	System.out.println("User database is empty");
+	    }
+
+	    
+	    NotificationsDAO.deleteNotification(n);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		
 		response.setContentType("text/xml");
 	    response.setHeader("Cache-Control", "no-cache");
 
@@ -44,13 +91,39 @@ public class AddUsers extends HttpServlet {
 		n = new Notifications(client.getUserId(),username,"AddUser");
 	
 	    // Check for online users before creating notifications
-		Set sessions = (Set) getServletContext().getAttribute("cyberprime.sessions");
-		Iterator sessionIt = sessions.iterator();
+		Set<Sessions> sessions = (Set) getServletContext().getAttribute("cyberprime.sessions");
+		Iterator<Sessions> sessionIt = sessions.iterator();
 		
 		while(sessionIt.hasNext()){
 			Sessions sex = (Sessions) sessionIt.next();
 			if (sex.getClientId().equalsIgnoreCase(username)){
 				NotificationsDAO.createNotification(n);
+				
+				Set<Sessions> users = (Set)getServletContext().getAttribute("cyberprime.users");
+				Iterator<Sessions> userIt = sessions.iterator();
+				if(!users.isEmpty()){
+					while(userIt.hasNext()){
+						Sessions user = (Sessions) userIt.next();
+						if(!user.getSessionId().equals(sess.getId())){		
+							sessionId = sess.getId();
+							System.out.println("Primary User added to user database with "+sessionId);
+							Sessions userAdded = new Sessions(sessionId,client.getUserId());
+							users.add(userAdded);
+						}
+						
+						else{
+							System.out.println("User already in user database");
+						}
+					}
+				}
+				
+				else{
+					sessionId = sess.getId();
+					Sessions userAdded = new Sessions(sessionId,client.getUserId());
+					users.add(userAdded);
+					System.out.println("user added");
+				}
+
 				return;
 			}
 			
@@ -60,14 +133,6 @@ public class AddUsers extends HttpServlet {
 			}
 			
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
 
 		
 	}

@@ -11,7 +11,7 @@ import cyberprime.util.EmailSender;
 
 public class ChangePattern {
 
-	static ArrayList<String> pattern = new ArrayList<String>();
+	private ArrayList<String> pattern = new ArrayList<String>();
 	private String newPattern = "";
 	private String content;
 	
