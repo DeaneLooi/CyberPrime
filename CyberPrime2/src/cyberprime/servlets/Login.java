@@ -3,6 +3,7 @@ package cyberprime.servlets;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -54,6 +55,7 @@ public class Login extends HttpServlet {
 		
 
 		Clients c = ClientsDAO.retrieveClient(client);
+		
 		if(c == null){
 			
 			Object obj = new Object();
@@ -64,7 +66,8 @@ public class Login extends HttpServlet {
 			}
 		
 		else if(c != null){
-		client.setUserId(c.getUserId());	
+		client.setUserId(c.getUserId());
+		
 		if(pattern.length() != 0){
 			try {
 				client.setPattern(pattern);
@@ -94,6 +97,25 @@ public class Login extends HttpServlet {
 		
 		else if(c.getActivation().equalsIgnoreCase("Active")){
 			if(client.getImageHash().equals(c.getImageHash()) && client.getPattern().equals(c.getPattern())){
+				
+				HttpSession existingHttpSession = request.getSession();
+				Clients existingClient = (Clients)existingHttpSession.getAttribute("c");
+					Sessions existingSessions = new Sessions(existingHttpSession.getId(), existingClient.getUserId());
+					Set sessionArray = (Set) getServletContext().getAttribute("cyberprime.sessions");
+					Iterator sessionIt = sessionArray.iterator();
+							while(sessionIt.hasNext()) {
+							Sessions sess = (Sessions)sessionIt.next();
+							System.out.println("Client id ="+sess.getClientId());
+							if(sess.getSessionId().equals(existingHttpSession.getId())){
+								Object obj = new Object();
+								obj = "<p style='color:red'>*Your account is already logged in</p>";
+								request.setAttribute("loginResult", obj);
+								request.getRequestDispatcher("patternLogin.jsp").forward(request, response);
+								return;
+							}
+							
+							}
+				
 				Sessions s = new Sessions(session.getId(),c.getUserId());
 //				s = SessionsDAO.createSession(s);
 //				Set sess = Collections.synchronizedSet(new HashSet());
