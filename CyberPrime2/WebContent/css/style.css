@@ -136,14 +136,16 @@ ol li {
 }
 
 #main {
-  margin: 50px auto;
-  width: 980px;
+  margin: auto;
+  width: 1200px;
   padding-bottom: 30px;
 }
 
 header { 
   background: transparent;
+  width: 1100px;
   height: 225px;
+  padding-left: 25px;
 }
 
 #logo { 
@@ -184,23 +186,26 @@ header {
 
 nav { 
   float: left;
+  align: center;
   height: 44px;
-  width: 980px;
+  width: 1100px;
   margin: 0 auto 0 auto;
   color: #FFF;
+  padding-right: 50px;
+  padding-left: -100px;
   background: transparent url(../images/transparent.png);
 } 
 
 #menu_container { 
-  width: 980px;
+  width: 1000px;
   margin: 0 auto 0 auto;
 }
 
 #site_content { 
-  width: 930px;
+  width: 1050px;
   overflow: hidden;
   margin: 0px auto 0 auto;
-  padding: 25px;
+  padding: 50px;
   background: transparent url(../images/transparent.png);
 } 
 
@@ -278,7 +283,7 @@ nav {
 }
 
 footer { 
-  width: 980px;
+  width: 1150px;
   font: 170% 'Yanone Kaffeesatz', arial, sans-serif;
   text-shadow: 1px 1px #000;
   height: 30px;
@@ -523,4 +528,65 @@ ul#nav li a:hover,ul#nav li a:focus {
 ul#nav ul li a:hover,ul#nav ul li a:focus { 
   color: #222;
   text-shadow: none;
+}
+
+/* additional stuff i added */
+
+#notifications {
+  height: 200px;
+  width: 200px;
+  border: 1px solid;
+  overflow: auto;
+}
+
+#services {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  width: 800px;
+  height: 600px;
+  border: none;
+}
+
+#users {
+  height: 200px;
+  width: 200px;
+  border: 1px solid;
+  overflow: auto;
+}
+
+#btn {
+  width: 98px;
+  height: 28px;
+  border: 1px solid #777777;
+  background: #333;
+  color: #DDD;
+  padding: 4px;
+  cursor: pointer;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+#username {
+  width: 200px;
+}
+
+#links {
+  margin: 4px 30px 0px 0px;
+  font-size: 175%;
+  font-family: Yanone Kaffeesatz; 
+    src: url('../fonts/YanoneKaffeesatz-Regular.eot'); 
+    src: local("Yanone Kaffeesatz"), url('../fonts/YanoneKaffeesatz-Regular.ttf'); 
+}
+
+#logout {
+  background-color: transparent; 
+  border: 0; 
+  padding: 0;
+  color: white;
+  margin: 8px 30px 0px 0px;
+  font-size: 175%;
+  font-family: Yanone Kaffeesatz; 
+    src: url('../fonts/YanoneKaffeesatz-Regular.eot'); 
+    src: local("Yanone Kaffeesatz"), url('../fonts/YanoneKaffeesatz-Regular.ttf'); 
 }
