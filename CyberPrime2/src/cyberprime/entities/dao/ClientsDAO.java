@@ -15,15 +15,13 @@ import cyberprime.util.EmailSender;
 
 
 public class ClientsDAO {
-	
 	private static DBController db = new DBController();
-	
 	
 	public static Clients registerClient(Clients clients) {
 		Connection currentCon = db.getConnection();
 		
 		try{
-			String query = "insert into Client(imageHash,imageSize,imageExtension,userId,email,pattern,token,activation) " +
+			String query = "insert into registration(imageHash,imageSize,imageExtension,userId,email,pattern,token,activation) " +
 					"values(?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = currentCon.prepareStatement(query);
 			// inserting values
@@ -63,7 +61,7 @@ public class ClientsDAO {
 		ResultSet rs = null;
 		
 		try{
-			String query="select * from Client where imageHash = ?;";
+			String query="select * from registration where imageHash = ?;";
 			PreparedStatement pstmt = currentCon.prepareStatement(query);
 			pstmt.setString(1,clients.getImageHash());
 			rs = pstmt.executeQuery();
@@ -102,7 +100,7 @@ public class ClientsDAO {
 		ResultSet rs = null;
 		Clients c = new Clients();
 		try{
-			String query = "select userId from Client where userId = ?;";
+			String query = "select userId from checkUser where userId = ?;";
 			PreparedStatement pstmt = currentCon.prepareStatement(query);
 			pstmt.setString(1, client.getUserId());
 			rs = pstmt.executeQuery();
@@ -142,7 +140,7 @@ public class ClientsDAO {
 		ResultSet rs = null;
 		Clients c = new Clients();
 		try{
-			String query = "select email from Client where email = ?;";
+			String query = "select email from checkUser where email = ?;";
 			PreparedStatement pstmt = currentCon.prepareStatement(query);
 			pstmt.setString(1, client.getEmail());
 			rs = pstmt.executeQuery();
@@ -179,7 +177,7 @@ public class ClientsDAO {
 		Connection currentCon = db.getConnection();
 		
 		try{
-			String query = "update Client set imageHash = ?, imageSize =?, imageExtension, email=?, pattern = ? where userId= ?";
+			String query = "update updateClients set imageHash = ?, imageSize =?, imageExtension, email=?, pattern = ? where userId= ?";
 			PreparedStatement pstmt = currentCon.prepareStatement(query);
 			pstmt.setString(1, clients.getImageHash());
 			pstmt.setInt(2, clients.getImageSize());
@@ -212,7 +210,7 @@ public class ClientsDAO {
 		Connection currentCon = db.getConnection();
 		
 		try{
-			String query = "update Client set activation = ?, token = ? where userId= ?";
+			String query = "update activation set activation = ?, token = ? where userId= ?";
 			PreparedStatement pstmt = currentCon.prepareStatement(query);
 			pstmt.setString(1, clients.getActivation());
 			pstmt.setString(2, "null");
@@ -243,7 +241,7 @@ public class ClientsDAO {
 		ResultSet rs = null;
 		String pattern = "";
 		try{
-			String selectQuery = "select pattern from Client where userId= ?";
+			String selectQuery = "select pattern from loginInfo where userId= ?";
 			PreparedStatement pstmt1 = currentCon.prepareStatement(selectQuery);
 			pstmt1.setString(1, clients.getUserId());
 			rs = pstmt1.executeQuery();
@@ -251,7 +249,7 @@ public class ClientsDAO {
 				pattern = rs.getString(1);
 			}
 			
-			String query = "update Client set pattern = ? where userId= ?";
+			String query = "update loginInfo set pattern = ? where userId= ?";
 			PreparedStatement pstmt = currentCon.prepareStatement(query);
 			pstmt.setString(1, clients.getPattern());
 			pstmt.setString(2, clients.getUserId());
@@ -278,7 +276,7 @@ public class ClientsDAO {
 		Connection currentCon = db.getConnection();
 		Clients c = new Clients();
 		try{
-			String query = "update Client set imageHash = ? where userId= ?";
+			String query = "update loginInfo set imageHash = ? where userId= ?";
 			PreparedStatement pstmt = currentCon.prepareStatement(query);
 			pstmt.setString(1, clients.getImageHash());
 			pstmt.setString(2, clients.getUserId());
