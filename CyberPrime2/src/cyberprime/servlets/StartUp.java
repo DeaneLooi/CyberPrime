@@ -30,26 +30,34 @@ public class StartUp extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Set sess = Collections.synchronizedSet(new HashSet());
-		getServletContext().setAttribute("cyberprime.sessions", sess);
-		
-		Set users = Collections.synchronizedSet(new HashSet());
-		getServletContext().setAttribute("cyberprime.users", users);
-		
-		Set msg = Collections.synchronizedSet(new HashSet());
-		getServletContext().setAttribute("cyberprime.msg", msg);
-		
-		response.setContentType("text/xml");
-	    response.setHeader("Cache-Control", "no-cache");
+		if (getServletContext().getAttribute("cyberprime.sessions")!=null) {
+			 PrintWriter writer = response.getWriter();
+			    String html="<h1>You have ALREADY officially started your server</h1>";
+			      writer.println(html);
+			      writer.close();
+		}
+		else {
+			Set sess = Collections.synchronizedSet(new HashSet());
+			getServletContext().setAttribute("cyberprime.sessions", sess);
+			
+			Set users = Collections.synchronizedSet(new HashSet());
+			getServletContext().setAttribute("cyberprime.users", users);
+			
+			Set msg = Collections.synchronizedSet(new HashSet());
+			getServletContext().setAttribute("cyberprime.msg", msg);
+			
+			response.setContentType("text/xml");
+		    response.setHeader("Cache-Control", "no-cache");
 
-	     PrintWriter writer = response.getWriter();
-	     
-		    String html="<h1>You have officially started your server</h1>";
-		    
+		     PrintWriter writer = response.getWriter();
+		     
+			    String html="<h1>You have officially started your server</h1>";
+			    
 
-		      writer.println(html);
+			      writer.println(html);
 
-		      writer.close();     
+			      writer.close();  
+		}
 	}
 
 	/**
