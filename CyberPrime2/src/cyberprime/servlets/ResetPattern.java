@@ -67,7 +67,7 @@ public class ResetPattern extends HttpServlet {
 		
 		else if(activation.equalsIgnoreCase("Active")){
 			Object obj = new Object();
-			obj = "<p style='color:red'>*You have already reset your pattern</p>";
+			obj = "<p style='color:red'>*You have already changed your pattern</p>";
 			request.setAttribute("loginResult", obj);
 			request.getRequestDispatcher("templateLogin.jsp").forward(request, response);
 			return;
