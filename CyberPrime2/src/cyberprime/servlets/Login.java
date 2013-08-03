@@ -97,7 +97,7 @@ public class Login extends HttpServlet {
 			if(client.getImageHash().equals(c.getImageHash()) && client.getPattern().equals(c.getPattern())){
 				
 				HttpSession existingHttpSession = request.getSession();
-				Clients existingClient = (Clients)existingHttpSession.getAttribute("c");
+				Clients existingClient = (Clients)existingHttpSession.getAttribute("client");
 				if (existingClient!=null){
 					Sessions existingSessions = new Sessions(existingHttpSession.getId(), existingClient.getUserId());
 					Set sessionArray = (Set) getServletContext().getAttribute("cyberprime.sessions");
@@ -130,7 +130,7 @@ public class Login extends HttpServlet {
 					session.removeAttribute("image");
 					session.removeAttribute("client");
 					FileMethods.fileDelete(image);
-					request.getRequestDispatcher("secured/newHome.jsp").forward(request, response);
+					request.getRequestDispatcher("secured/templateNewHome.jsp").forward(request, response);
 				}
 				
 				else if(c.getActivation().equalsIgnoreCase("Reset")){
