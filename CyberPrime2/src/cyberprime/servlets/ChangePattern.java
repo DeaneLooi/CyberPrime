@@ -66,7 +66,7 @@ public class ChangePattern extends HttpServlet {
 		ClientsDAO.changePattern(client);
 		ClientsDAO.activateClients(client);
 		
-		request.getRequestDispatcher("secured/newHome.jsp").forward(request, response);
+		request.getRequestDispatcher("secured/templateNewHome.jsp").forward(request, response);
 	}
 
 }

@@ -80,8 +80,8 @@ String image = (String)session.getAttribute("image");
 Choose a pattern for your password.
 <br>
 <input type="hidden" name="pattern"/>
-<input type="reset" value="reset" onclick="resetPattern();"/>
-<input type="submit" value="register"/>
+<input type="reset" class="btn" value="reset" onclick="resetPattern();"/>
+<input type="submit" class="btn" value="register"/>
 </form>
 ${regResult}
 </div>

@@ -65,7 +65,7 @@
 		<p>Upload image file:<br/><input type="file" name="datafile" size="40"></p>
 		<p>Email address:<br/><input type="text" name="email" autocomplete="off"/></p>
          <div>
-         <input type="submit" value="Reset Pattern">
+         <input type="submit" class="btn" value="Reset Pattern">
          </div>
 		 </form>
   </div> 

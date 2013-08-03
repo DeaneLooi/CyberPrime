@@ -14,18 +14,9 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
-	$(document).ready(function() {
-		$("#notificationsTab").click(function() {
-			$("#notifications").slideToggle("slow");
-		});
 
-		$('#userid').click(function() {
-			$('#users').slideToggle("slow");
-		});
-
-		$('.tabs').click(function() {
-			$('.moving_bg').animate($(this).position(), 'medium');
-		});
+$(document).ready(function(){
+	
 
 		$("#add").click(function() {
 
@@ -35,29 +26,17 @@
 				cache : false
 			});
 
-			$.get("AddUsers", {
+			$.post("AddUsers", {
 				username : username
 			});
 
 			document.getElementById('username').value = "";
 
-			$("#notifications").slideToggle("slow");
 		});
-
-	});
-
-	function removeUser() {
-
-		$(this).closest('.userCont').animate({
-			height : 0
-		}, 500, function() {
-			$(this).remove();
-		});
-
-	}
+});
 
 	function changePage(src) {
-		document.getElementById("content").src = src;
+		document.getElementById("services").src = src;
 	}
 
 	/* function checkNotifications(){
@@ -89,7 +68,8 @@
 
 	});
 </script>
-<link rel="stylesheet" type="text/css" href="../css/newHome.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/securedStyle.css"/>
 
 </head>
 
@@ -129,33 +109,33 @@ Clients client = (Clients) session.getAttribute("c");
 						Username is:
 						<h4><%=client.getUserId() %></h4>
 					</h3>
-					<div id="users">
-						<h4><%=client.getUserId() %></h4>
-					</div>
-					<input type="text" id="username"
-						placeholder="Username to add/remove"> <input type="button"
-						id="btn" value="Add User"> <input type="button" id="btn"
-						value="Delete User">
-				</div>
-				<div class="sidebar">
-					<h3>Notifications</h3>
-					<div id="notifications">
-					</div>
-				</div>
-				<div class="sidebar">
-					<li class="middlemenu anon"><a href="#">Anonymous Mode</a></li>
-					<li id="anon" class="anon"><div class="anonSwitch">
+					</br>
+					<h4>Anonymous Mode</h4>
+					<div class="anonSwitch">
 							<input type="checkbox" name="anonSwitch"
 								class="anonSwitch-checkbox" id="anonswitch"> <label
 								class="anonSwitch-label" for="anonswitch">
 								<div class="anonSwitch-inner"></div>
 								<div class="anonSwitch-switch"></div>
 							</label>
-						</div></li>
+						</div>
+						</br>
+					<div id="users">
+						<h4><%=client.getUserId() %></h4>
+					</div>
+					<input type="text" name="username" id="username"
+						placeholder="Username to add/remove" autocomplete="off"> 
+						<input type="submit" id="add" class="btn" value="Add User"> 
+						<input type="submit" id="remove" class="btn" value="Remove User">
+				</div>
+				<div class="sidebar">
+					<h3>Notifications</h3>
+					<div id="notifications">
+					</div>
 				</div>
 			</div>
 			<div class="serviceframe">
-				<iframe id="services" src="chat.html"></iframe>
+				<iframe id="services" src="secured/firstPage.jsp"></iframe>
 			</div>
 		</div>
 		<footer>

@@ -63,13 +63,13 @@
 				CSS to style it so it becomes 3 characters wide, JS to make sure all are numbers
          </p> -->
 		 <!--Auto detect IP address-->
-         <p>Please specify an image file as a password: <br/><input type="file" name="image" onmousemove="button_onmousemove.call(this,event)"></p>
+         <p>Please specify an image file as a password: <br/><input type="file"s name="image" onmousemove="button_onmousemove.call(this,event)"></p>
 <!-- 		 <p>Please specify a second image file as a honeypot password (optional): <br/><input type="file" name="datafile" size="40"></p> -->
 		 <p>Email: <br/><input type="text" name="email"required autocomplete="off" onmousemove="button_onmousemove.call(this,event)"/></p>
          <div>
          		<input type="hidden" name ="captcha" id ="captcha" value="false">
 		
-		<input type="submit" onmousemove="button_onmousemove.call(this,event)">
+		<input type="submit" class="btn" onmousemove="button_onmousemove.call(this,event)">
          </div>
 		 </form>
 		 <br/>

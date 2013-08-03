@@ -555,7 +555,7 @@ ul#nav ul li a:hover,ul#nav ul li a:focus {
   overflow: auto;
 }
 
-#btn {
+.btn {
   width: 98px;
   height: 28px;
   border: 1px solid #777777;
@@ -563,8 +563,6 @@ ul#nav ul li a:hover,ul#nav ul li a:focus {
   color: #DDD;
   padding: 4px;
   cursor: pointer;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
 }
 
 #username {
@@ -577,7 +575,9 @@ ul#nav ul li a:hover,ul#nav ul li a:focus {
   font-family: Yanone Kaffeesatz; 
     src: url('../fonts/YanoneKaffeesatz-Regular.eot'); 
     src: local("Yanone Kaffeesatz"), url('../fonts/YanoneKaffeesatz-Regular.ttf'); 
+    cursor:pointer;
 }
+
 
 #logout {
   background-color: transparent; 
@@ -589,4 +589,5 @@ ul#nav ul li a:hover,ul#nav ul li a:focus {
   font-family: Yanone Kaffeesatz; 
     src: url('../fonts/YanoneKaffeesatz-Regular.eot'); 
     src: local("Yanone Kaffeesatz"), url('../fonts/YanoneKaffeesatz-Regular.ttf'); 
+    cursor:pointer;
 }

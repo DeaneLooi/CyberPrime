@@ -236,6 +236,38 @@ public class ClientsDAO {
 		
 	}
 	
+	public static String getActivation(Clients clients){
+		Connection currentCon = db.getConnection();
+		ResultSet rs = null;
+		String activation = "";
+		try{
+			String query = "select activation from activation where userId= ?";
+			PreparedStatement pstmt = currentCon.prepareStatement(query);
+			pstmt.setString(1, clients.getUserId());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				activation = rs.getString("1");
+			}
+		}catch(Exception ex){
+			System.out.println("Update failed: An Exception has occurred! "+ ex);
+			clients = null;
+		}		
+		finally {
+
+			if (currentCon != null) {
+				try {
+					currentCon.close();
+				} catch (Exception e) {
+				}
+
+				currentCon = null;
+			}
+		}
+		return activation;
+		
+	}
+	
 	public static String changePattern(Clients clients){
 		Connection currentCon = db.getConnection();
 		ResultSet rs = null;

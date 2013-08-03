@@ -81,7 +81,7 @@ public class GetNotifications extends HttpServlet {
 		    	 else if(n.getContent().equalsIgnoreCase("AddUser")){
 		    		 content = n.getSender()+" has requested you to join his/her room";
 		    	 }
-		    	 html+="<div style='border-style:solid;border-color:black;border-width:1px;padding:5px'>";
+		    	 html+="<div style='background-color:black;border-style:solid;border-color:white;border-width:1px;padding:5px'>";
 		    	 html+=content+"<br>";
 		    	 if(n.getContent().equalsIgnoreCase("AddUser"))
 		    		 html+="<a href='AddUsers'>Accept</a>         <a href='Reject?content=AddUser'>Reject</a>";
@@ -103,7 +103,7 @@ public class GetNotifications extends HttpServlet {
 		    	 else if(n.getContent().equalsIgnoreCase("AddUser")){
 		    		 content = "You have requested to add "+n.getReceiver()+" to join your room";
 		    	 }
-		    	 html+="<div style='border-style:solid;border-color:gray;border-width:1px;padding:5px'>";
+		    	 html+="<div style='background-color:black;border-style:solid;border-color:white;border-width:1px;padding:5px'>";
 		    	 html+=content;
 		    	 html+="</div>";
 		     }

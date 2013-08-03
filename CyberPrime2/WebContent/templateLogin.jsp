@@ -67,10 +67,10 @@
 		 <!--Auto detect IP address-->
          <p>Upload your image file for verification: <br/><input type="file" name="datafile" size="40"></p>
          <div>
-         <input type="submit" value="next">
+         <input type="submit" class="btn" value="next">&nbsp;<a href="templateResetPattern.jsp">Forgot Pattern?</a>
          </div>
 		 </form>
-		 <a href="templateResetPattern.jsp">Forgot Pattern?</a>
+
   </div> 
       </div>
     </div>

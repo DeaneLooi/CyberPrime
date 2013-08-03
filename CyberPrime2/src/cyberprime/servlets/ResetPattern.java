@@ -55,10 +55,24 @@ public class ResetPattern extends HttpServlet {
 		String userId = request.getParameter("userId");
 		Clients client = new Clients();
 		client.setUserId(userId);
-		client.setDBPattern(pattern);
-		ClientsDAO.changePattern(client);
-		request.getRequestDispatcher("templateLogin.jsp").forward(request, response);
-		return;
+		String activation = ClientsDAO.getActivation(client);
+		if(activation.equalsIgnoreCase("Reset")){
+			client.setDBPattern(pattern);
+			client.setActivation("Active");
+			ClientsDAO.changePattern(client);
+			ClientsDAO.activateClients(client);
+			request.getRequestDispatcher("templateLogin.jsp").forward(request, response);
+			return;
+		}
+		
+		else if(activation.equalsIgnoreCase("Active")){
+			Object obj = new Object();
+			obj = "<p style='color:red'>*You have already reset your pattern</p>";
+			request.setAttribute("loginResult", obj);
+			request.getRequestDispatcher("templateLogin.jsp").forward(request, response);
+			return;
+		}
+
 	}
 
 	/**

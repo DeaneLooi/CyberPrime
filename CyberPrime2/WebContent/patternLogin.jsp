@@ -78,8 +78,8 @@ Please input your pattern
 
 <br>
 <input type="hidden" name="pattern"/>
-<input type="reset" value="reset" onclick="resetPattern();"/>
-<input type="submit" value="login"/>
+<input type="reset" class="btn" value="reset" onclick="resetPattern();"/>
+<input type="submit" class="btn" value="login"/>
 </form>
 ${loginResult}
 </div>
