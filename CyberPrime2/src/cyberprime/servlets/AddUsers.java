@@ -38,7 +38,6 @@ public class AddUsers extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println(sessionId);
 		response.setContentType("application/stream");
 	    response.setHeader("Cache-Control", "no-cache");
 	    
@@ -52,20 +51,32 @@ public class AddUsers extends HttpServlet {
 	    Set<Sessions> users = (Set<Sessions>)getServletContext().getAttribute("cyberprime.users");
 	    Iterator<Sessions> userIt = users.iterator();
 	    Sessions newUser = new Sessions(sessionId,client.getUserId());
+	    
+	    boolean check = false;
+	    
 	    if(!users.isEmpty()){
 		    while(userIt.hasNext()){
 		    	
 		    	Sessions user = (Sessions)userIt.next();
 		    	
-		    	if(user.getSessionId().equals(newUser.getSessionId())){
-		    		System.out.println("Requested user added");
-		    		users.add(newUser);
+		    	if(user.getSessionId().equals(newUser.getSessionId()) && !user.getClientId().equals(client.getUserId())){
+		    		check = true;
 		    	}
 		    	
 		    	else{
-		    		
+		    		check = false;
+		    		break;
 		    	}
 		    	
+		    }
+		    
+		    if(check){
+	    		System.out.println("Requested user added");
+	    		users.add(newUser);
+		    }
+		    
+		    else{
+		    	System.out.println("User already in database");
 		    }
 	    }
 	    
@@ -94,7 +105,7 @@ public class AddUsers extends HttpServlet {
 	    // Check for online users before creating notifications
 		Set<Sessions> sessions = (Set) getServletContext().getAttribute("cyberprime.sessions");
 		Iterator<Sessions> sessionIt = sessions.iterator();
-		
+		boolean check = false;
 		while(sessionIt.hasNext()){
 			Sessions sex = (Sessions) sessionIt.next();
 			if (sex.getClientId().equalsIgnoreCase(username)){
@@ -105,23 +116,34 @@ public class AddUsers extends HttpServlet {
 				if(!users.isEmpty()){
 					while(userIt.hasNext()){
 						Sessions user = (Sessions) userIt.next();
-						if(!user.getSessionId().equals(sess.getId())){		
-							sessionId = sess.getId();
-							System.out.println("Primary User added to user database with "+sessionId);
-							Sessions userAdded = new Sessions(sessionId,client.getUserId());
-							users.add(userAdded);
+						if(!user.getSessionId().equals(sess.getId())){
+							check = true;
+
+
 						}
 						
 						else{
-							System.out.println("User already in user database");
+							check = false;
+							break;
 						}
+					}
+					
+					if(check){
+						sessionId = sess.getId();
+						System.out.println("Primary User added to user database with "+sessionId);
+						Sessions userAdded = new Sessions(sessionId,client.getUserId());
+						users.add(userAdded);
+					}
+					
+					else{
+						System.out.println("Session already in use");
 					}
 				}
 				
 				else{
 					sessionId = sess.getId();
-					Sessions userAdded = new Sessions(sessionId,client.getUserId());
-					users.add(userAdded);
+					Sessions newUser = new Sessions(sessionId,client.getUserId());
+					users.add(newUser);
 					System.out.println("user added");
 				}
 
