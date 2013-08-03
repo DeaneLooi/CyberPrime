@@ -4,7 +4,7 @@
 <html>
 
 <head>
-  <title>template</title>
+  <title>Pattern Login</title>
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />

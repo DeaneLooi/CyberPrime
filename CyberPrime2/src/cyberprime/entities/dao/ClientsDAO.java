@@ -247,10 +247,10 @@ public class ClientsDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				activation = rs.getString("1");
+				activation = rs.getString(1);
 			}
 		}catch(Exception ex){
-			System.out.println("Update failed: An Exception has occurred! "+ ex);
+			System.out.println("Select activation failed: An Exception has occurred! "+ ex);
 			clients = null;
 		}		
 		finally {
@@ -366,14 +366,14 @@ public class ClientsDAO {
 	
 	public static void main(String args[]) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 
-		Clients client = new Clients("57g4hab18bbi9926493e",null,102,".jpg","deanelooiz@hotmail.com","pattern");
-		client.setActivation("Pending");
-		client.setToken();
-		//Clients c = ClientsDAO.registerClient(client);
-		client.setPattern("00");
-		String oldPattern = ClientsDAO.changePattern(client);
-		System.out.println("Old pattern = "+oldPattern);
-		System.out.println("New Pattern = "+client.getPattern());
+		Clients client = new Clients();
+		client.setUserId("e03810b24h73ah81e3i8");
+		System.out.println(ClientsDAO.getActivation(client));
+//		Clients c = ClientsDAO.registerClient(client);
+//		client.setPattern("00");
+//		String oldPattern = ClientsDAO.changePattern(client);
+//		System.out.println("Old pattern = "+oldPattern);
+//		System.out.println("New Pattern = "+client.getPattern());
 		//System.out.println(client.getToken());
 //		EmailSender email = new EmailSender(client);
 //		email.sendActivationLink(client.getToken());
