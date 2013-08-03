@@ -15,7 +15,6 @@ import org.apache.commons.io.*;
 import cyberprime.entities.*;
 import cyberprime.entities.dao.*;
 import cyberprime.util.FileEncryption;
-import cyberprime.util.TestProgressListener;
 
 @WebServlet("/FileTransfer")
 public class FileTransfer extends HttpServlet {
@@ -84,13 +83,8 @@ public class FileTransfer extends HttpServlet {
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		// maximum file size to be uploaded.
 		upload.setSizeMax(maxFileSize);
-
-		TestProgressListener testProgressListener = new TestProgressListener();
-		upload.setProgressListener(testProgressListener);
-
-		HttpSession session = request.getSession();
-		session.setAttribute("testProgressListener", testProgressListener);
 		
+		HttpSession session = request.getSession();
 		Clients client = (Clients) session.getAttribute("c");
 		
 		try {

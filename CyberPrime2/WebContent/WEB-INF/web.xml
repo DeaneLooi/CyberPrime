@@ -80,15 +80,6 @@
     <url-pattern>/ActivateAccount</url-pattern>
   </servlet-mapping>
   
-  <servlet>
-  <servlet-name>ProgressServlet</servlet-name>
-  <servlet-class>cyberprime.servlets.ProgressServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  <servlet-name>ProgressServlet</servlet-name>
-  <url-pattern>/progress</url-pattern>
-  </servlet-mapping>
-  
   <filter>
     <filter-name>AccessFilter</filter-name>
     <filter-class>cyberprime.servlets.filters.AccessFilter</filter-class>
@@ -110,10 +101,5 @@
         C:\Users\Tan Wai Kit\Desktop\MAIN DESKTOP\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\CyberPrime2\
      </param-value>
   </context-param>
-   <listener>
-     <listener-class>
-     org.apache.commons.fileupload.servlet.FileCleanerCleanup
-     </listener-class>
-     </listener>
  
 </web-app>
