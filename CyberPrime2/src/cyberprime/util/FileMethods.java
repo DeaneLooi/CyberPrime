@@ -5,7 +5,7 @@ import java.io.File;
 
 public class FileMethods {
 
-	private static File folder= new File(Constants.WAIKIT_PATH);
+	private static File folder= new File(Constants.SAMUEL_PATH);
 	
 	public static void fileDelete(String fileName){
 		File[] listOfFiles = folder.listFiles();

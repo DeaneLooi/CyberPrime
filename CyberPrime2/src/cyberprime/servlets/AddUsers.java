@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,7 @@ import cyberprime.entities.dao.NotificationsDAO;
 /**
  * Servlet implementation class AddUsers
  */
-//@WebServlet("/AddUsers")
+@WebServlet("/AddUsers")
 public class AddUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public static Notifications n = null;

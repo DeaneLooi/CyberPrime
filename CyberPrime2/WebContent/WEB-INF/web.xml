@@ -4,81 +4,6 @@
   <welcome-file-list>
     <welcome-file>template.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <display-name>WebBrowsing</display-name>
-    <servlet-name>WebBrowsing</servlet-name>
-    <servlet-class>cyberprime.servlets.WebBrowsing</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>Registration</servlet-name>
-    <servlet-class>cyberprime.servlets.Registration</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Registration</servlet-name>
-    <url-pattern>/Registration</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>Register</servlet-name>
-    <servlet-class>cyberprime.servlets.Register</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Register</servlet-name>
-    <url-pattern>/Register</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>Logon</servlet-name>
-    <servlet-class>cyberprime.servlets.Logon</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Logon</servlet-name>
-    <url-pattern>/Logon</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>Login</servlet-name>
-    <servlet-class>cyberprime.servlets.Login</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Login</servlet-name>
-    <url-pattern>/Login</url-pattern>
-  </servlet-mapping>
-  
-    <servlet>
-    <servlet-name>Logout</servlet-name>
-    <servlet-class>cyberprime.servlets.Logout</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Logout</servlet-name>
-    <url-pattern>/Logout</url-pattern>
-  </servlet-mapping>
-  
-      <servlet>
-    <servlet-name>AddUsers</servlet-name>
-    <servlet-class>cyberprime.servlets.AddUsers</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddUsers</servlet-name>
-    <url-pattern>/AddUsers</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <display-name>FileTransfer</display-name>
-    <servlet-name>FileTransfer</servlet-name>
-    <servlet-class>cyberprime.servlets.FileTransfer</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  <servlet-name>FileTransfer</servlet-name>
-  <url-pattern>/FileTransfer</url-pattern>
-  </servlet-mapping>
-  
-   <servlet>
-    <display-name>ActivateAccount</display-name>
-    <servlet-name>ActivateAccount</servlet-name>
-    <servlet-class>cyberprime.servlets.ActivateAccount</servlet-class>
-  </servlet>
-   <servlet-mapping>
-    <servlet-name>ActivateAccount</servlet-name>
-    <url-pattern>/ActivateAccount</url-pattern>
-  </servlet-mapping>
   
   <filter>
     <filter-name>AccessFilter</filter-name>
@@ -88,7 +13,7 @@
 <filter-name>AccessFilter</filter-name>
 <url-pattern>/secured/*</url-pattern>
 </filter-mapping>
-  <listener>
+<listener>
   	<listener-class>
   	cyberprime.servlets.HttpServletListener
   	</listener-class>
@@ -98,7 +23,7 @@
     <description>Location to store uploaded file</description>
     <param-name>file-upload</param-name>
     <param-value>
-        C:\Users\Tan Wai Kit\Desktop\MAIN DESKTOP\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\CyberPrime2\
+       C:\\Users\\Samuel Ong\\Desktop\\Year 2 Sem 1 Stuff\\InfoSecurity Project\\apache-tomcat-7.0.42 (deployable one)\\apache-tomcat-7.0.42\\webapps\\CyberPrime2\\loginImages\\
      </param-value>
   </context-param>
  

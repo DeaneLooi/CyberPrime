@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +17,7 @@ import cyberprime.entities.Sessions;
 /**
  * Servlet implementation class Logout
  */
-//@WebServlet("/Logout")
+@WebServlet("/Logout")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

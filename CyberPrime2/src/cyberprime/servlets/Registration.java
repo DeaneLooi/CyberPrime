@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +23,6 @@ import cyberprime.entities.Clients;
 import cyberprime.entities.dao.ClientsDAO;
 import cyberprime.util.Constants;
 import cyberprime.util.EmailValidator;
-import cyberprime.util.FileMethods;
 import cyberprime.util.ImageEncryption;
 import cyberprime.util.ImageValidator;
 import cyberprime.util.RandomString;
@@ -32,7 +32,7 @@ import cyberprime.util.RandomString;
 /**
  * Servlet implementation class Registration
  */
-//@WebServlet("/Registration")
+@WebServlet("/Registration")
 public class Registration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -56,7 +56,7 @@ public class Registration extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String repos = Constants.DEANE_PATH;
+		String repos = Constants.SAMUEL_PATH;
 		Clients client = new Clients();
 		ImageEncryption en = null;
 		File repo = new File(repos);

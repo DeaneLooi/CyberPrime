@@ -17,7 +17,6 @@
 
 $(document).ready(function(){
 	
-
 		$("#add").click(function() {
 
 			var username = document.getElementById('username').value;
@@ -113,8 +112,9 @@ Clients client = (Clients) session.getAttribute("c");
 					<h4>Anonymous Mode</h4>
 					<div class="anonSwitch">
 							<input type="checkbox" name="anonSwitch"
-								class="anonSwitch-checkbox" id="anonswitch"> <label
-								class="anonSwitch-label" for="anonswitch">
+								class="anonSwitch-checkbox" id="anonswitch" onclick=> 
+								
+								<label class="anonSwitch-label" for="anonswitch">
 								<div class="anonSwitch-inner"></div>
 								<div class="anonSwitch-switch"></div>
 							</label>
