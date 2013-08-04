@@ -9,14 +9,14 @@
 </head>
 <body>
 <div id="textContent">
-<h3>Welcome to the Cyber Prime services!</h3>
-<h4>Our services are as shown below:</h4>
+<h3 style="color:white;">Welcome to the Cyber Prime services!</h3>
+<h4 style="color:white;">Our services are as shown below:</h4>
 <figure>
     <a href="chat.jsp"><img src="../images/newChat.png" alt="chat"></a>
     <a href="conference.jsp"><img src="../images/newConference.png" alt="conference"></a>
     <a href="fileTransfer.jsp"><img src="../images/newFile.png" alt="file"></a>
     <a href="video.jsp"><img src="../images/newWeb.png" alt="web"></a>
-    <figcaption>We provide secure, anonymous collaboration in the form of 
+    <figcaption style="color:white;">We provide secure, anonymous collaboration in the form of 
     Chat, Video Conference, File Transfer and Web Browsing services.</figcaption>
 </figure>
 </div>

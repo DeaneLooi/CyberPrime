@@ -124,10 +124,7 @@ textarea
 
 #textContent {
     text-align:center;
-}
-
-h3,h4,figcaption {
-	color:white;
+    color:white;
 }
 
 /* fileTransfer.jsp CSS */
