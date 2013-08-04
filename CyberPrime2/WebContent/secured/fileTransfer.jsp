@@ -78,17 +78,17 @@ body {
 	}
 
 	function doProgressLoop(prog, max, counter) {
-		var x = $('element4').innerHTML;
+		var x = $('#element4').innerHTML;
 		var y = parseInt(x);
 		if (!isNaN(y)) {
 			prog = y;
 		}
-		jsProgress.update({
+		progressBar.update({
 			maximum : max,
 			progress : prog
 		});
 		counter = counter + 1;
-		progressBar.byId('counter').innerHTML = counter;
+		progressBar.byId('#element4').innerHTML = counter;
 		if (prog < 100) {
 			setTimeout("getProgress()", 500);
 			setTimeout("doProgressLoop(" + prog + "," + max + "," + counter
@@ -98,13 +98,13 @@ body {
 
 	function getProgress() {
 		progressBar
-				.xhrGet({
-					url : 'file-upload	', // http://localhost:8080/file-upload/progress
+				.get({
+					url : 'http://localhost/CyberPrime2/FileTransfer', // http://localhost:8080/file-upload/progress
 					load : function(data) {
-						progressBar.byId('element4').innerHTML = data;
+						progressBar.byId('#element4').innerHTML = data;
 					},
 					error : function(data) {
-						progressBar.byId('element4').innerHTML = "Error retrieving progress";
+						progressBar.byId('#element4').innerHTML = "Error retrieving progress";
 					}
 				});
 	}

@@ -146,24 +146,25 @@ public class FileTransfer extends HttpServlet {
 									NotificationsDAO.createNotification(n);
 									String fileName = item.getName();
 									int i = fileName.lastIndexOf("\\");
-									file = new File(filePath+fileName.substring(i+1,fileName.length()));
+									fileName = fileName.substring(i+1,fileName.length());
+									file = new File(filePath + fileName);
 									long sizeInBytes = item.getSize();
 									String mimeType = item.getContentType();
 
-
-										
-										
 										out.println("<p><strong>Thank You For Waiting</strong></p>");
 
 										item.write(file);
 										
 										//encrypt
 										file = new FileEncryption("AES", file.getAbsolutePath()).encrypt();
+										System.out.println(file.getAbsolutePath());
 										out.println("Uploaded Filename: "
 												+ fileName + "<br>");
 										out.println("<p>File Size: "  
 												+ (sizeInBytes/(1000*1000)) + "mb " + "</p>");
-									
+									out.println("<b/><b/><b/><b/><b/><p><strong>Uploading in " +
+												"progress, please do not redirect " +
+												"your browser to another page.</strong></p>");
 									out.println("</body>");
 									out.println("</html>");
 									
@@ -228,11 +229,10 @@ public class FileTransfer extends HttpServlet {
 		try{
 		//decrypt 	
 		file = new FileEncryption("AES", files.getFilePath() + ".enc").decrypt();
-		file = new File(filePath + file.getName());
 		int length = 0;
 		ServletOutputStream outStream = response.getOutputStream();
 		ServletContext context = getServletConfig().getServletContext();
-		String mimetype = context.getMimeType(filePath + file.getName());
+		String mimetype = context.getMimeType(file.getAbsolutePath());
 
 		// sets response content type
 		if (mimetype == null) {
@@ -241,7 +241,7 @@ public class FileTransfer extends HttpServlet {
 		response.setContentType(mimetype);
 		response.setContentLength((int) file.length());
 
-		String fileName = (new File(filePath + file.getName())).getName();
+		String fileName = (new File(file.getAbsolutePath())).getName();
 
 		// sets HTTP header
 		response.setHeader("Content-Disposition", "attachment; filename=\""
