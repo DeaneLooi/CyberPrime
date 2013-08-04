@@ -145,19 +145,12 @@ public class FileTransfer extends HttpServlet {
 								try {
 									NotificationsDAO.createNotification(n);
 									String fileName = item.getName();
+									int i = fileName.lastIndexOf("\\");
+									file = new File(filePath+fileName.substring(i+1,fileName.length()));
 									long sizeInBytes = item.getSize();
 									String mimeType = item.getContentType();
 
-									// Write the file
-									if (fileName.lastIndexOf("\\") >= 0) {
 
-										file = new File(filePath
-												+ fileName.substring(fileName
-														.lastIndexOf("\\")));
-									} else {
-										file = new File(filePath
-												+ fileName.substring(fileName
-														.lastIndexOf("\\") + 1));
 										
 										
 										out.println("<p><strong>Thank You For Waiting</strong></p>");
@@ -170,7 +163,7 @@ public class FileTransfer extends HttpServlet {
 												+ fileName + "<br>");
 										out.println("<p>File Size: "  
 												+ (sizeInBytes/(1000*1000)) + "mb " + "</p>");
-									}
+									
 									out.println("</body>");
 									out.println("</html>");
 									
