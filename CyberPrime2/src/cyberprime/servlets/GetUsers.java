@@ -3,6 +3,7 @@ package cyberprime.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -75,6 +76,7 @@ public class GetUsers extends HttpServlet {
 
 			}
 			
+
 			for(int i=0; i<getUsers.size();i++){
 				Sessions user = getUsers.get(i);
 				content += "<p align:'center'>&nbsp;&nbsp;";

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cyberprime.entities.ChatMessages;
 import cyberprime.entities.Clients;
 import cyberprime.entities.Sessions;
 
@@ -43,14 +44,51 @@ public class RemoveUsers extends HttpServlet {
 			Set<Sessions> users = (Set) getServletContext().getAttribute("cyberprime.users");
 			Iterator userIt = users.iterator();
 			
+			
 			if(!users.isEmpty()){
 				while(userIt.hasNext()){
 					Sessions user = (Sessions) userIt.next();
 					if(user.getClientId().equals(client.getUserId())){
-						System.out.print(user.getClientId());
-						System.out.println("User removed");
-						userIt.remove();
-						users.remove(user);
+						
+						if(user.getSessionId().equals(session.getId())){
+							Set<ChatMessages> msg = (Set) getServletContext().getAttribute("cyberprime.msg");
+							Iterator msgIt = msg.iterator();
+							
+							while(msgIt.hasNext()){
+								ChatMessages messages = (ChatMessages) msgIt.next();
+								if(messages.getSessionId().equals(session.getId())){
+									System.out.println("Message removed");
+									msgIt.remove();
+									msg.remove(messages);
+								}
+								
+								else{
+									System.out.println("Wrong message");
+								}
+							}
+							userIt = users.iterator();
+							while(userIt.hasNext()){
+								Sessions userDelete = (Sessions) userIt.next();
+								if(user.getSessionId().equals(session.getId())){
+									System.out.print(user.getClientId());
+									System.out.println("User removed");
+									userIt.remove();
+									users.remove(userDelete);
+								}
+								
+								else{
+									System.out.println("Wrong User");
+								}
+							}
+						}
+						
+						else{
+							System.out.print(user.getClientId());
+							System.out.println("User removed");
+							userIt.remove();
+							users.remove(user);
+						}
+
 						
 					}
 					

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import cyberprime.entities.Clients;
 import cyberprime.entities.dao.ClientsDAO;
+import cyberprime.util.FileMethods;
 
 /**
  * Servlet implementation class ChangePattern
@@ -42,7 +43,7 @@ public class ChangePattern extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		Clients client = (Clients) session.getAttribute("c");
-
+		String image = (String) session.getAttribute("image");
 		String pattern = (String)request.getParameter("pattern");
 		
 		client.setActivation("Active");
@@ -65,6 +66,7 @@ public class ChangePattern extends HttpServlet {
 		
 		ClientsDAO.changePattern(client);
 		ClientsDAO.activateClients(client);
+		FileMethods.fileDelete(image);
 		
 		request.getRequestDispatcher("secured/templateNewHome.jsp").forward(request, response);
 	}

@@ -54,17 +54,14 @@ public class Login extends HttpServlet {
 		
 
 		Clients c = ClientsDAO.retrieveClient(client);
-		
-		if(c == null){
-			
+		if(c.getActivation()==null){
 			Object obj = new Object();
 			obj = "<p style='color:red'>*There is no user registered with the image uploaded</p>";
 			request.setAttribute("loginResult", obj);
 			request.getRequestDispatcher("templateLogin.jsp").forward(request, response);
-			
-			}
+			return;
+		}
 		
-		else if(c != null){
 		client.setUserId(c.getUserId());
 		
 		if(pattern.length() != 0){
@@ -82,7 +79,7 @@ public class Login extends HttpServlet {
 			request.getRequestDispatcher("patternLogin.jsp").forward(request, response);
 			return;
 		}
-		
+
 
 		if(c.getActivation().equalsIgnoreCase("Pending")){
 			Object obj = new Object();
@@ -147,10 +144,6 @@ public class Login extends HttpServlet {
 			}
 		}
 
-		
-
-		
-		}
 
 		
 	}

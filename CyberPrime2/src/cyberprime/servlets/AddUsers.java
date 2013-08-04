@@ -102,49 +102,60 @@ public class AddUsers extends HttpServlet {
 		Clients client = (Clients)sess.getAttribute("c");
 		n = new Notifications(client.getUserId(),username,"AddUser");
 	
+		Sessions newUser = new Sessions(sess.getId(),client.getUserId());
 	    // Check for online users before creating notifications
 		Set<Sessions> sessions = (Set) getServletContext().getAttribute("cyberprime.sessions");
 		Iterator<Sessions> sessionIt = sessions.iterator();
 		boolean check = false;
+		boolean check2 = false;
 		while(sessionIt.hasNext()){
 			Sessions sex = (Sessions) sessionIt.next();
 			if (sex.getClientId().equalsIgnoreCase(username)){
-				NotificationsDAO.createNotification(n);
-				
+
 				Set<Sessions> users = (Set)getServletContext().getAttribute("cyberprime.users");
 				Iterator<Sessions> userIt = sessions.iterator();
 				if(!users.isEmpty()){
 					while(userIt.hasNext()){
 						Sessions user = (Sessions) userIt.next();
-						if(!user.getSessionId().equals(sess.getId())){
-							check = true;
-
-
-						}
+				    	if(user.getSessionId().equals(newUser.getSessionId()) && user.getClientId().equals(newUser.getClientId())){
+				    		check = true;
+				    		break;
+				    	}
 						
-						else{
-							check = false;
+						else if(!user.getSessionId().equals(newUser.getSessionId()) && !user.getClientId().equals(newUser.getClientId())){
+							check2 = true;
 							break;
 						}
+
 					}
 					
-					if(check){
+					if(check2){
+						return;
+					}
+					
+					else if(check && !check2){
+						NotificationsDAO.createNotification(n);
+						System.out.println("User is added");
+					}
+					
+					else if(!check && !check2){
 						sessionId = sess.getId();
 						System.out.println("Primary User added to user database with "+sessionId);
 						Sessions userAdded = new Sessions(sessionId,client.getUserId());
 						users.add(userAdded);
+						NotificationsDAO.createNotification(n);
+						
 					}
 					
-					else{
-						System.out.println("Session already in use");
-					}
+
 				}
 				
 				else{
 					sessionId = sess.getId();
-					Sessions newUser = new Sessions(sessionId,client.getUserId());
 					users.add(newUser);
 					System.out.println("user added");
+					NotificationsDAO.createNotification(n);
+					
 				}
 
 				return;
