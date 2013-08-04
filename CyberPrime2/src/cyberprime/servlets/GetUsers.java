@@ -54,10 +54,10 @@ public class GetUsers extends HttpServlet {
 		if(!users.isEmpty()){
 			while(userIt.hasNext()){
 				Sessions user = (Sessions)userIt.next();
-				System.out.print("Client " +client.getUserId());
-				System.out.println("User "+user.getClientId());
+//				System.out.print("Client " +client.getUserId());
+//				System.out.println("User "+user.getClientId());
 				if(user.getClientId().equals(client.getUserId())){
-					System.out.println("Correct user");
+//					System.out.println("Correct user");
 					sessionId = user.getSessionId();
 					
 					userIt = users.iterator();
@@ -66,7 +66,7 @@ public class GetUsers extends HttpServlet {
 						Sessions user1 = (Sessions)userIt.next();
 						
 						if(user1.getSessionId().equals(sessionId)){
-							System.out.println("Correct user "+user1.getClientId());
+//							System.out.println("Correct user "+user1.getClientId());
 							getUsers.add(user1);
 						}
 					}
@@ -88,7 +88,7 @@ public class GetUsers extends HttpServlet {
 		}
 		
 		else{
-			System.out.println("User database is empty");
+//			System.out.println("User database is empty");
 		}
 		
 

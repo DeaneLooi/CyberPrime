@@ -83,7 +83,7 @@ public class GetNotifications extends HttpServlet {
 		    	 }
 		    	 
 		    	 else if(n.getContent().equalsIgnoreCase("Anon")){
-		    		 content += "Your new username is "+n.getSender();
+		    		 content = "Your new username is "+n.getSender();
 		    	 }
 		    	 html+="<div style='background-color:black;border-style:solid;border-color:white;border-width:1px;padding:5px'>";
 		    	 html+=content+"<br>";
@@ -100,16 +100,22 @@ public class GetNotifications extends HttpServlet {
 		    	 Notifications n = displaySenderNotifications.get(i);
 		    	 String content = "";
 		    	 if(n.getContent().equalsIgnoreCase("FileTransfer")){
-		    		 content = "You have requested to send a file to "+n.getReceiver();
-
+		    		 html+="<div style='background-color:black;border-style:solid;border-color:white;border-width:1px;padding:5px'>";
+		    		 html+="You have requested to send a file to "+n.getReceiver();
+			    	 html+="</div>";
 		    	 }
 		    	 
 		    	 else if(n.getContent().equalsIgnoreCase("AddUser")){
-		    		 content = "You have requested to add "+n.getReceiver()+" to join your room";
+		    		 html+="<div style='background-color:black;border-style:solid;border-color:white;border-width:1px;padding:5px'>";
+		    		 html+= "You have requested to add "+n.getReceiver()+" to join your room";
+		    		 html+="</div>";
 		    	 }
-		    	 html+="<div style='background-color:black;border-style:solid;border-color:white;border-width:1px;padding:5px'>";
-		    	 html+=content;
-		    	 html+="</div>";
+		    	 
+		    	 else if(n.getContent().equalsIgnoreCase("Anon")){
+		    		 content = "";
+		    	 }
+
+
 		     }
 	    }
 

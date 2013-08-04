@@ -71,17 +71,17 @@ public class AddUsers extends HttpServlet {
 		    }
 		    
 		    if(check){
-	    		System.out.println("Requested user added");
+//	    		System.out.println("Requested user added");
 	    		users.add(newUser);
 		    }
 		    
 		    else{
-		    	System.out.println("User already in database");
+//		    	System.out.println("User already in database");
 		    }
 	    }
 	    
 	    else{
-	    	System.out.println("User database is empty");
+//	    	System.out.println("User database is empty");
 	    }
 
 	    
@@ -135,12 +135,12 @@ public class AddUsers extends HttpServlet {
 					
 					else if(check && !check2){
 						NotificationsDAO.createNotification(n);
-						System.out.println("User is added");
+//						System.out.println("User is added");
 					}
 					
 					else if(!check && !check2){
 						sessionId = sess.getId();
-						System.out.println("Primary User added to user database with "+sessionId);
+//						System.out.println("Primary User added to user database with "+sessionId);
 						Sessions userAdded = new Sessions(sessionId,client.getUserId());
 						users.add(userAdded);
 						NotificationsDAO.createNotification(n);
@@ -153,7 +153,7 @@ public class AddUsers extends HttpServlet {
 				else{
 					sessionId = sess.getId();
 					users.add(newUser);
-					System.out.println("user added");
+//					System.out.println("user added");
 					NotificationsDAO.createNotification(n);
 					
 				}

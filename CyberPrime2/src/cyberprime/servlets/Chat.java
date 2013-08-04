@@ -45,7 +45,7 @@ public class Chat extends HttpServlet {
 		
 		response.setContentType("text/xml");
 	    response.setHeader("Cache-Control", "no-cache");
-	    System.out.println("Getting value from virtual database");
+//	    System.out.println("Getting value from virtual database");
 	    PrintWriter writer = response.getWriter();
 	     
 		HttpSession session = request.getSession();
@@ -65,19 +65,19 @@ public class Chat extends HttpServlet {
 
 			if(user.getClientId().equals(client.getUserId())){
 				check = true;
-				System.out.print("Client "+client.getUserId());
-				System.out.print("Users "+user.getClientId());
+//				System.out.print("Client "+client.getUserId());
+//				System.out.print("Users "+user.getClientId());
 				sessionId = user.getSessionId();
-				System.out.println("Correct user");
+//				System.out.println("Correct user");
 				break;
 				
 			}
 			
 			else{
 				check = false;
-				System.out.print("Client "+client.getUserId());
-				System.out.print("Users "+user.getClientId());
-				System.out.println("Wrong user");
+//				System.out.print("Client "+client.getUserId());
+//				System.out.print("Users "+user.getClientId());
+//				System.out.println("Wrong user");
 			}
 			
 			
@@ -89,15 +89,15 @@ public class Chat extends HttpServlet {
 			while(msgIt.hasNext()){
 				ChatMessages message = (ChatMessages)msgIt.next();
 				if(message.getSessionId().equals(sessionId)){
-					System.out.print(message.getClientId());
-					System.out.println("Success");
+//					System.out.print(message.getClientId());
+//					System.out.println("Success");
 					messages.add(message);
 				}
 			}
 		}
 		
 		else{
-			System.out.println("You are not in a session");
+//			System.out.println("You are not in a session");
 		}
 
 		
@@ -137,7 +137,7 @@ public class Chat extends HttpServlet {
 			HttpSession session = request.getSession();
 			Clients client = (Clients)session.getAttribute("c");
 			
-			System.out.println(message);
+//			System.out.println(message);
 			Set<Sessions> users = (Set)getServletContext().getAttribute("cyberprime.users");
 			Iterator<Sessions> userIt = users.iterator();
 			
@@ -151,7 +151,7 @@ public class Chat extends HttpServlet {
 					String encryptedMessage = "";
 					try {
 						encryptedMessage = Algorithms.encrypt(message,sessionId.substring(0,16));
-						System.out.println(encryptedMessage);
+//						System.out.println(encryptedMessage);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -160,7 +160,7 @@ public class Chat extends HttpServlet {
 				}
 				
 				else{
-					System.out.println("User not in database");
+//					System.out.println("User not in database");
 				}
 				
 			}
