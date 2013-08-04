@@ -59,57 +59,6 @@ body {
 }
 </style>
 
-<!-- jsProgressBarHandler prerequisites : prototype.js -->
-<script type="text/javascript" src="../js/prototype/prototype.js"></script>
-
-<!-- jsProgressBarHandler core -->
-<script type="text/javascript"
-	src="../js/bramus/jsProgressBarHandler.js"></script>
-
-<script type="text/javascript">
-	function doProgress() {
-		var button = window.document.getElementById("submitButton");
-		button.disabled = true;
-		var max = 100;
-		var prog = 0;
-		var counter = 0;
-		getProgress();
-		doProgressLoop(prog, max, counter);
-	}
-
-	function doProgressLoop(prog, max, counter) {
-		var x = $('#element4').innerHTML;
-		var y = parseInt(x);
-		if (!isNaN(y)) {
-			prog = y;
-		}
-		progressBar.update({
-			maximum : max,
-			progress : prog
-		});
-		counter = counter + 1;
-		progressBar.byId('#element4').innerHTML = counter;
-		if (prog < 100) {
-			setTimeout("getProgress()", 500);
-			setTimeout("doProgressLoop(" + prog + "," + max + "," + counter
-					+ ")", 1000);
-		}
-	}
-
-	function getProgress() {
-		progressBar
-				.get({
-					url : 'http://localhost/CyberPrime2/FileTransfer', // http://localhost:8080/file-upload/progress
-					load : function(data) {
-						progressBar.byId('#element4').innerHTML = data;
-					},
-					error : function(data) {
-						progressBar.byId('#element4').innerHTML = "Error retrieving progress";
-					}
-				});
-	}
-</script>
-
 <title>File Upload</title>
 </head>
 <body>
@@ -134,16 +83,5 @@ body {
 			</form>
 		</center>
 	</div>
-
-	<span style="color: #006600; font-weight: bold;">Upload Progress
-		Bar</span>
-	<br />
-	<span class="progressBar" id="element4">0%</span>
-	<span class="extra"><a href="#"
-		onclick="myJsProgressBarHandler.setPercentage('element4','0');return false;"><img
-			src="../images/icons/empty.gif" alt="" title=""
-			onmouseout="$('Text4').innerHTML ='&laquo; Select Options'"
-			onmouseover="$('Text4').innerHTML ='Empty Bar'" /></a></span>
-
 </body>
 </html>
