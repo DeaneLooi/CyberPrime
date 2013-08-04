@@ -137,7 +137,10 @@ Clients client = (Clients) session.getAttribute("c");
 					<h4>Anonymous Mode</h4>
 					<div class="anonSwitch">
 							<input type="checkbox" name="anonSwitch"
-								class="anonSwitch-checkbox" id="anonswitch"> <label
+								class="anonSwitch-checkbox" id="anonswitch"
+								method="post" onclick="${pageContext.request.contextPath}/AnonymousMode"> 
+								
+								<label
 								class="anonSwitch-label" for="anonswitch">
 								<div class="anonSwitch-inner"></div>
 								<div class="anonSwitch-switch"></div>
