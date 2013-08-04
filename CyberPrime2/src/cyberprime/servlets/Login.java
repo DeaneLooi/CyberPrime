@@ -101,14 +101,20 @@ public class Login extends HttpServlet {
 							while(sessionIt.hasNext()) {
 							Sessions sess = (Sessions)sessionIt.next();
 							System.out.println("Client id ="+sess.getClientId());
-							if(sess.getClientId().equals(existingClient.getUserId())){
+							if(sess.getClientId().equals(existingClient.getUserId()) && sess.getSessionId().equals(existingHttpSession.getId())){
+								continue;
+							}
+							
+							else{
 								Object obj = new Object();
 								obj = "<p style='color:red'>*Your account is already logged in</p>";
 								request.setAttribute("loginResult", obj);
 								FileMethods.fileDelete(image);
 								request.getRequestDispatcher("templateLogin.jsp").forward(request, response);
 								return;
-							}				
+								
+							}
+							
 							}
 				}
 				
@@ -124,7 +130,6 @@ public class Login extends HttpServlet {
 				
 				if(c.getActivation().equalsIgnoreCase("Active")){
 					session.removeAttribute("image");
-					session.removeAttribute("client");
 					FileMethods.fileDelete(image);
 					request.getRequestDispatcher("secured/templateNewHome.jsp").forward(request, response);
 				}

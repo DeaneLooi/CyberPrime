@@ -42,6 +42,9 @@ public class Logout extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Clients client = (Clients)session.getAttribute("c");
+		
+		if(client!=null){
+		
 			Sessions s = new Sessions(session.getId(), client.getUserId());
 			//s = SessionsDAO.deleteSession(s);
 			Set sessions = (Set) getServletContext().getAttribute("cyberprime.sessions");
@@ -61,6 +64,12 @@ public class Logout extends HttpServlet {
 		session.removeAttribute("c");
 		session.invalidate();
 		response.sendRedirect("template.jsp");
+		}
+		
+		else{
+			response.sendRedirect("template.jsp");
+		}
+
 	}
 
 }

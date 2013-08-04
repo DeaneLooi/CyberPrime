@@ -66,6 +66,7 @@ public class ChangePattern extends HttpServlet {
 		
 		ClientsDAO.changePattern(client);
 		ClientsDAO.activateClients(client);
+		session.removeAttribute("image");
 		FileMethods.fileDelete(image);
 		
 		request.getRequestDispatcher("secured/templateNewHome.jsp").forward(request, response);
