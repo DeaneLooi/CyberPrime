@@ -112,7 +112,7 @@ public class Login extends HttpServlet {
 							Sessions sess = (Sessions)sessionIt.next();
 							System.out.println("Client id ="+sess.getClientId());
 							if(sess.getClientId().equals(existingClient.getUserId()) && sess.getSessionId().equals(existingHttpSession.getId())){
-								continue;
+								break;
 							}
 							
 							else{
