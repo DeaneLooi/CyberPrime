@@ -28,7 +28,7 @@ import cyberprime.util.Algorithms;
 @WebServlet("/Chat")
 public class Chat extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String sessionId = "";
+	private String sessionId = null;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -50,23 +50,34 @@ public class Chat extends HttpServlet {
 	     
 		HttpSession session = request.getSession();
 		Clients client = (Clients)session.getAttribute("c");
-		
+
 		Set<Sessions> users = (Set)getServletContext().getAttribute("cyberprime.users");
 		Iterator<Sessions> userIt = users.iterator();
 		
 		Set<ChatMessages> msg = (Set)getServletContext().getAttribute("cyberprime.msg");
 		ArrayList<ChatMessages> messages = new ArrayList<ChatMessages>();
 
+		boolean check = false;
+		
 		while(userIt.hasNext()){
 			
 			Sessions user = (Sessions)userIt.next();
+
 			if(user.getClientId().equals(client.getUserId())){
+				check = true;
+				System.out.print("Client "+client.getUserId());
+				System.out.print("Users "+user.getClientId());
 				sessionId = user.getSessionId();
+				System.out.println("Correct user");
+				break;
 				
 			}
 			
 			else{
-				
+				check = false;
+				System.out.print("Client "+client.getUserId());
+				System.out.print("Users "+user.getClientId());
+				System.out.println("Wrong user");
 			}
 			
 			
@@ -74,12 +85,21 @@ public class Chat extends HttpServlet {
 		
 		Iterator<ChatMessages> msgIt = msg.iterator();
 		
-		while(msgIt.hasNext()){
-			ChatMessages message = (ChatMessages)msgIt.next();
-			if(message.getSessionId().equals(sessionId)){
-				messages.add(message);
+		if(check){
+			while(msgIt.hasNext()){
+				ChatMessages message = (ChatMessages)msgIt.next();
+				if(message.getSessionId().equals(sessionId)){
+					System.out.print(message.getClientId());
+					System.out.println("Success");
+					messages.add(message);
+				}
 			}
 		}
+		
+		else{
+			System.out.println("You are not in a session");
+		}
+
 		
 
 		String html = "<div>";
@@ -94,8 +114,8 @@ public class Chat extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			content += "<p>"+message.getClientId(); 
-			content += "      :"+"    "+decryptedMessage;
+			content += "<p>&nbsp;&nbsp;"+message.getClientId(); 
+			content += "&nbsp;&nbsp;:"+"&nbsp;&nbsp;"+decryptedMessage;
 			content += "</p>";
 			
 		}

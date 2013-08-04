@@ -49,8 +49,6 @@ background-color:#DDD;
     color: #DDD;
     padding: 4px;
     cursor: pointer;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
 }
 
 textarea
@@ -83,7 +81,7 @@ $(document).ready(function() {
 
 $.ajaxSetup({ cache: false }); 
 
-setInterval(function() {$("#displayMessage").load(url); }, 1000);
+setInterval(function() {$("#displayMessage").load(url); }, 500);
 
 $("#postMessage").click(function(){
 	

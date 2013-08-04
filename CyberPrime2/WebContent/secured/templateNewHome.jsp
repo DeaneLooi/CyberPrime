@@ -15,23 +15,62 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 
+var url = 'http://localhost/CyberPrime2/GetNotifications';
+var url1 ='http://localhost/CyberPrime2/GetUsers';
+	
+function getNotifications(){
+	setInterval(function() {
+		$("#notifications").load(url);
+	}, 1000);
+}
+
+function getUsers(){
+	setInterval(function() {
+		$("#users").load(url1);
+	}, 1000);
+}
+
+
 $(document).ready(function(){
+	
+
+		$.ajaxSetup({
+			cache: false
+		});
 	
 		$("#add").click(function() {
 
 			var username = document.getElementById('username').value;
 
-			$.ajaxSetup({
-				cache : false
-			});
-
-			$.post("AddUsers", {
+			$.post("http://localhost/CyberPrime2/AddUsers", {
 				username : username
 			});
 
 			document.getElementById('username').value = "";
 
 		});
+		
+		$("#remove").click(function(){
+			
+			var username = document.getElementById('username').value;
+			
+			$.post("http://localhost/CyberPrime2/RemoveUsers", {
+				username : username
+			}),
+			
+			document.getElementById('username').value = "";
+		});
+		
+		$("#leave").click(function(){
+
+			$.get("http://localhost/CyberPrime2/RemoveUsers", {
+			});
+			
+		});
+		
+		getNotifications();
+		
+		getUsers();
 });
 
 	function changePage(src) {
@@ -52,21 +91,7 @@ $(document).ready(function(){
 	 } */
 </script>
 
-<script>
-	var url = 'GetNotifications';
 
-	$(document).ready(function() {
-
-		$.ajaxSetup({
-			cache : false
-		});
-
-		setInterval(function() {
-			$("#notifications").load(url);
-		}, 1000);
-
-	});
-</script>
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 <link rel="stylesheet" type="text/css" href="css/securedStyle.css"/>
 
@@ -112,21 +137,20 @@ Clients client = (Clients) session.getAttribute("c");
 					<h4>Anonymous Mode</h4>
 					<div class="anonSwitch">
 							<input type="checkbox" name="anonSwitch"
-								class="anonSwitch-checkbox" id="anonswitch" onclick=> 
-								
-								<label class="anonSwitch-label" for="anonswitch">
+								class="anonSwitch-checkbox" id="anonswitch"> <label
+								class="anonSwitch-label" for="anonswitch">
 								<div class="anonSwitch-inner"></div>
 								<div class="anonSwitch-switch"></div>
 							</label>
 						</div>
 						</br>
 					<div id="users">
-						<h4><%=client.getUserId() %></h4>
+
 					</div>
 					<input type="text" name="username" id="username"
 						placeholder="Username to add/remove" autocomplete="off"> 
 						<input type="submit" id="add" class="btn" value="Add User"> 
-						<input type="submit" id="remove" class="btn" value="Remove User">
+						<input type="submit" id="leave" class="btn" value="Leave Room">
 				</div>
 				<div class="sidebar">
 					<h3>Notifications</h3>
