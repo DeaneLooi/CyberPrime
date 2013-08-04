@@ -125,7 +125,6 @@ Clients client = (Clients) session.getAttribute("c");
 		<div id="menu_container">
 			<ul class="sf-menu" id="nav">
 			<li onclick="changePage('secured/firstPage.jsp');" id="links">Home</li>
-			<li onclick="changePage('secured/video.jsp');" id="links">Web Browsing</li>
 			<li onclick="changePage('secured/fileTransfer.jsp');" id="links">File Transfer</li>
 			<li onclick="changePage('secured/chat.jsp');" id="links">Chat</li>
 			<li onclick="changePage('secured/conference.jsp');" id="links">Video Conference</li>
