@@ -111,11 +111,7 @@ public class Login extends HttpServlet {
 							while(sessionIt.hasNext()) {
 							Sessions sess = (Sessions)sessionIt.next();
 							System.out.println("Client id ="+sess.getClientId());
-							if(sess.getClientId().equals(existingClient.getUserId()) && sess.getSessionId().equals(existingHttpSession.getId())){
-								break;
-							}
-							
-							else{
+							if(sess.getClientId().equals(existingClient.getUserId())){
 								Object obj = new Object();
 								obj = "<p style='color:red'>*Your account is already logged in</p>";
 								request.setAttribute("loginResult", obj);
@@ -136,7 +132,7 @@ public class Login extends HttpServlet {
 				Set sessions = (Set)getServletContext().getAttribute("cyberprime.sessions");
 				sessions.add(s);
 				session.setAttribute("c", c);
-				session.setMaxInactiveInterval(60);
+				session.setMaxInactiveInterval(120);
 				
 				if(c.getActivation().equalsIgnoreCase("Active")){
 					session.removeAttribute("image");

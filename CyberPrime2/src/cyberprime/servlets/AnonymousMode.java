@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cyberprime.entities.Clients;
+import cyberprime.entities.Notifications;
 import cyberprime.entities.Sessions;
 import cyberprime.entities.dao.ClientsDAO;
+import cyberprime.entities.dao.NotificationsDAO;
 import cyberprime.util.FileMethods;
 
 /**
@@ -22,7 +24,7 @@ import cyberprime.util.FileMethods;
 @WebServlet("/AnonymousMode")
 public class AnonymousMode extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private static int anonymousUserNo=0;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -53,7 +55,10 @@ public class AnonymousMode extends HttpServlet {
 					Sessions sess = (Sessions)sessionIt.next();
 					System.out.println("Client id ="+sess.getClientId());
 					if(sess.getClientId().equals(existingClient.getUserId())){
-						existingClient.setUserId("Anonymous");
+						existingClient.setUserId("Anonymous"+anonymousUserNo);
+						anonymousUserNo++;
+						Notifications n = new Notifications(existingClient.getUserId(),existingClient.getUserId(),"Anon");
+						NotificationsDAO.createNotification(n);
 						Sessions anonSessions = new Sessions(existingHttpSession.getId(), existingClient.getUserId());
 						sessionArray.remove(sess);
 						sessionArray.add(anonSessions);
