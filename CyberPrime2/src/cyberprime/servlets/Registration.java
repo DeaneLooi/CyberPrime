@@ -115,13 +115,19 @@ public class Registration extends HttpServlet {
 				
 				else{
 					String fileName = item.getName();
-					saveFileName = repos + fileName;
-					File uploadedFile = new File(saveFileName);
+					
 					
 					if(!fileName.isEmpty()){
 						
 
 						ImageValidator iv = new ImageValidator();
+						int i=fileName.lastIndexOf("\\");
+						fileName=fileName.substring(i+1,fileName.length());
+						saveFileName = repos + fileName;
+						File uploadedFile = new File(saveFileName);
+						
+						System.out.println("fileName = "+fileName);
+						
 						
 						if(iv.validate(fileName)){
 							try{
@@ -158,9 +164,9 @@ public class Registration extends HttpServlet {
 							session.setAttribute("image",newFileName);
 
 						}
-						else if(!iv.validate(fileName)){
+						else{
 							Object obj = new Object();
-							obj = "<p style='color:red'>*Invalid email address</p>";
+							obj = "<p style='color:red'>*File Name not validated</p>";
 							request.setAttribute("regResult", obj);
 							request.getRequestDispatcher("templateRegister.jsp").forward(request, response);
 							return;

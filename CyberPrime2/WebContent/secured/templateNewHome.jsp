@@ -42,7 +42,7 @@ $(document).ready(function(){
 
 			var username = document.getElementById('username').value;
 
-			$.post("http://localhost/CyberPrime2/AddUsers", {
+			$.post("https://samuelong-pc:8443/CyberPrime2/AddUsers", {
 				username : username
 			});
 
@@ -54,16 +54,19 @@ $(document).ready(function(){
 			
 			var username = document.getElementById('username').value;
 			
-			$.post("http://localhost/CyberPrime2/RemoveUsers", {
+			$.post("https://samuelong-pc:8443/CyberPrime2/RemoveUsers", {
 				username : username
 			}),
 			
 			document.getElementById('username').value = "";
 		});
 		
-		$("#leave").click(function(){
+		$("#anonswitch").click(function(){
 
-			$.get("http://localhost/CyberPrime2/RemoveUsers", {
+			var anonymousMode=document.getElementById('anonswitch').value;
+			alert("anonymousMode = "+anonymousMode);
+			$.post("https://samuelong-pc:8443/CyberPrime2/AnonymousMode", {
+				anonSwitch:anonymousMode
 			});
 			
 		});
@@ -137,8 +140,7 @@ Clients client = (Clients) session.getAttribute("c");
 					<h4>Anonymous Mode</h4>
 					<div class="anonSwitch">
 							<input type="checkbox" name="anonSwitch"
-								class="anonSwitch-checkbox" id="anonswitch"
-								method="post" onclick="${pageContext.request.contextPath}/AnonymousMode"> 
+								class="anonSwitch-checkbox" id="anonswitch"> 
 								
 								<label
 								class="anonSwitch-label" for="anonswitch">

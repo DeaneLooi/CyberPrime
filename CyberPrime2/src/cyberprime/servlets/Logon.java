@@ -81,17 +81,16 @@ public class Logon extends HttpServlet {
 				
 				else{
 					String fileName = item.getName();
-					if (fileName.endsWith("\\ISPJ.PNG")) {
-						fileName="ISPJ.PNG";
-					}
 						
-					saveFileName = repos + fileName;
-					File uploadedFile = new File(saveFileName);
-					
 					if(!fileName.isEmpty()){
 						
 						ImageValidator iv = new ImageValidator();
-						System.out.println("filename = "+fileName);
+						int i=fileName.lastIndexOf("\\");
+						fileName=fileName.substring(i+1,fileName.length());
+						saveFileName = repos + fileName;
+						File uploadedFile = new File(saveFileName);
+						
+						System.out.println("fileName = "+fileName);
 						
 						if(iv.validate(fileName)){
 							try{

@@ -41,6 +41,7 @@ public class AnonymousMode extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("AnonymousMode servlet called.");
 		HttpSession existingHttpSession = request.getSession();
 		Clients existingClient = (Clients)existingHttpSession.getAttribute("client");
 		String anonymousMode=request.getParameter("anonSwitch");

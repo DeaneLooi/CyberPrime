@@ -59,6 +59,7 @@ public class EmailSender {
 				message.setContent("<h1>Dear client,</h1><p>Please activate your account by clicking " +
 						"<a rel='nofollow' target='_blank' href='http://"+Constants.IP_ADDRESS+"/CyberPrime2/ActivateAccount?token="+token+"&userId="+c.getUserId()+"'>here</a></p>",
                         "text/html" );
+				System.out.println("Before sending");
 				Transport.send(message);
 				System.out.print("send");
 	 
