@@ -15,8 +15,8 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 
-var url = 'http://localhost/CyberPrime2/GetNotifications';
-var url1 ='http://localhost/CyberPrime2/GetUsers';
+var url = 'https://samuelong-pc:443/CyberPrime2/GetNotifications';
+var url1 ='https://samuelong-pc:443/CyberPrime2/GetUsers';
 	
 function getNotifications(){
 	setInterval(function() {
@@ -42,7 +42,7 @@ $(document).ready(function(){
 
 			var username = document.getElementById('username').value;
 
-			$.post("https://samuelong-pc:8443/CyberPrime2/AddUsers", {
+			$.post("https://samuelong-pc:443/CyberPrime2/AddUsers", {
 				username : username
 			});
 
@@ -54,7 +54,7 @@ $(document).ready(function(){
 			
 			var username = document.getElementById('username').value;
 			
-			$.post("https://samuelong-pc:8443/CyberPrime2/RemoveUsers", {
+			$.post("https://samuelong-pc:443/CyberPrime2/RemoveUsers", {
 				username : username
 			}),
 			
@@ -65,7 +65,7 @@ $(document).ready(function(){
 
 			var anonymousMode=document.getElementById('anonswitch').value;
 			alert("anonymousMode = "+anonymousMode);
-			$.post("https://samuelong-pc:8443/CyberPrime2/AnonymousMode", {
+			$.post("https://samuelong-pc:443/CyberPrime2/AnonymousMode", {
 				anonSwitch:anonymousMode
 			});
 			

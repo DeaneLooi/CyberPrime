@@ -29,7 +29,8 @@ public class EmailSender {
 			this.c = c;
 			Properties props = new Properties();
 			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.starttls.enable", true);
+			props.put("mail.smtp.ssl.trust", "*");
 			props.put("mail.smtp.host", "smtp.gmail.com");
 			props.put("mail.smtp.port", "587");
 
@@ -57,7 +58,7 @@ public class EmailSender {
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(c.getEmail()));
 				message.setSubject(subject);
 				message.setContent("<h1>Dear client,</h1><p>Please activate your account by clicking " +
-						"<a rel='nofollow' target='_blank' href='http://"+Constants.IP_ADDRESS+"/CyberPrime2/ActivateAccount?token="+token+"&userId="+c.getUserId()+"'>here</a></p>",
+						"<a rel='nofollow' target='_blank' href='https://samuelong-pc:443/CyberPrime2/ActivateAccount?token="+token+"&userId="+c.getUserId()+"'>here</a></p>",
                         "text/html" );
 				System.out.println("Before sending");
 				Transport.send(message);
@@ -113,7 +114,7 @@ public class EmailSender {
 				message.setContent("<h1>Dear client,</h1><p>This is the new pattern for your account</p>"+
 						"<p>"+content+"</p>"+
 						"If you did not request to reset your pattern, please click "+
-						"<a rel='nofollow' target='_blank' href='http://"+Constants.IP_ADDRESS+"/CyberPrime2/ResetPattern?pattern="+newPatternS+"&userId="+c.getUserId()+"'>here</a>",
+						"<a rel='nofollow' target='_blank' href='https://samuelong-pc:443/CyberPrime2/ResetPattern?pattern="+newPatternS+"&userId="+c.getUserId()+"'>here</a>",
                         "text/html" );
 				Transport.send(message);
 				System.out.print("send");

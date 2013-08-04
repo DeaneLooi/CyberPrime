@@ -4,21 +4,19 @@
   <welcome-file-list>
     <welcome-file>template.jsp</welcome-file>
   </welcome-file-list>
-  
   <filter>
     <filter-name>AccessFilter</filter-name>
     <filter-class>cyberprime.servlets.filters.AccessFilter</filter-class>
   </filter>
   <filter-mapping>
-<filter-name>AccessFilter</filter-name>
-<url-pattern>/secured/*</url-pattern>
-</filter-mapping>
-<listener>
-  	<listener-class>
+    <filter-name>AccessFilter</filter-name>
+    <url-pattern>/secured/*</url-pattern>
+  </filter-mapping>
+  <listener>
+    <listener-class>
   	cyberprime.servlets.HttpServletListener
   	</listener-class>
   </listener>
-  
   <context-param>
     <description>Location to store uploaded file</description>
     <param-name>file-upload</param-name>
@@ -26,5 +24,4 @@
        C:\\Users\\Samuel Ong\\Desktop\\Year 2 Sem 1 Stuff\\InfoSecurity Project\\apache-tomcat-7.0.42 (deployable one)\\apache-tomcat-7.0.42\\webapps\\CyberPrime2\\loginImages\\
      </param-value>
   </context-param>
- 
 </web-app>
