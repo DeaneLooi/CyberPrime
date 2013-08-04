@@ -43,6 +43,7 @@ public class Logout extends HttpServlet {
 		HttpSession session = request.getSession();
 		Clients client = (Clients)session.getAttribute("c");
 		
+//		new logout
 		if(client!=null){
 		
 			Sessions s = new Sessions(session.getId(), client.getUserId());

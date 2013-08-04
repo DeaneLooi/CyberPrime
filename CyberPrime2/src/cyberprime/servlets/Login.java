@@ -36,7 +36,8 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+	
 	}
 
 	/**
@@ -44,9 +45,18 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+	HttpSession session = request.getSession();
+		
 
-		HttpSession session = request.getSession();
 		Clients client = (Clients) session.getAttribute("client");
+		
+		if(client==null){
+			Object obj = new Object();
+			obj = "<p style='color:red'>*Your session has timed out</p>";
+			request.setAttribute("loginResult", obj);
+			request.getRequestDispatcher("templateLogin.jsp").forward(request, response);
+			return;
+		}
 		String image = (String)session.getAttribute("image");
 
 		String pattern = (String)request.getParameter("pattern");
