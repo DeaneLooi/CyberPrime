@@ -75,7 +75,7 @@ textarea
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 
-var url = 'http://localhost/CyberPrime2/Chat';
+var url = 'https://samuelong-pc:443/CyberPrime2/Chat';
 
 $(document).ready(function() {
 
@@ -89,7 +89,7 @@ $("#postMessage").click(function(){
 	
 	$.ajaxSetup({ cache: false});
 
-	$.post("http://localhost/CyberPrime2/Chat", { msg: msg});
+	$.post("https://samuelong-pc:443/CyberPrime2/Chat", { msg: msg});
 	
 	document.getElementById('inputMessage').value = "";
 });

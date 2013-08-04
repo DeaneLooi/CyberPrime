@@ -17,6 +17,7 @@
 
 var url = 'https://samuelong-pc:443/CyberPrime2/GetNotifications';
 var url1 ='https://samuelong-pc:443/CyberPrime2/GetUsers';
+var count=0;
 	
 function getNotifications(){
 	setInterval(function() {
@@ -50,21 +51,24 @@ $(document).ready(function(){
 
 		});
 		
-		$("#remove").click(function(){
+		$("#leave").click(function(){
 			
-			var username = document.getElementById('username').value;
-			
-			$.post("https://samuelong-pc:443/CyberPrime2/RemoveUsers", {
-				username : username
-			}),
-			
-			document.getElementById('username').value = "";
+			$.get("https://samuelong-pc:443/CyberPrime2/RemoveUsers", {
+				
+			});
 		});
 		
 		$("#anonswitch").click(function(){
-
-			var anonymousMode=document.getElementById('anonswitch').value;
-			alert("anonymousMode = "+anonymousMode);
+			var anonymousMode="";
+			if (count==0) {
+			anonymousMode="on";
+			count++;
+			}
+			else if (count==1) {			
+				anonymousMode="off";
+			count--;	
+			}
+			
 			$.post("https://samuelong-pc:443/CyberPrime2/AnonymousMode", {
 				anonSwitch:anonymousMode
 			});
@@ -144,7 +148,7 @@ Clients client = (Clients) session.getAttribute("c");
 								
 								<label
 								class="anonSwitch-label" for="anonswitch">
-								<div class="anonSwitch-inner"></div>
+								<div class="anonSwitch-inner" id="anonSwitch-inner"></div>
 								<div class="anonSwitch-switch"></div>
 							</label>
 						</div>
