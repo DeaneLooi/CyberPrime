@@ -116,7 +116,7 @@ Clients client = (Clients) session.getAttribute("c");
 			<div id="logo_text">
 				<!-- class="logo_colour", allows you to change the colour of the text -->
 				<h1>
-					<a href="index.html">cyber<span class="logo_colour">_Prime</span></a>
+					<a href="template.jsp">cyber<span class="logo_colour">_Prime</span></a>
 				</h1>
 				<h2>Secure, anonymous collaboration.</h2>
 			</div>
