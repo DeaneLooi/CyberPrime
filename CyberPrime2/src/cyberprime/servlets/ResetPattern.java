@@ -82,7 +82,7 @@ public class ResetPattern extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		Clients c = (Clients)session.getAttribute("c");
-		String repos = Constants.DEANE_PATH;
+		String repos = Constants.SAMUEL_PATH;
 		Clients client = new Clients();
 		ImageEncryption en = null;
 		File repo = new File(repos);
